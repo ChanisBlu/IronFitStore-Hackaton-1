@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -6,20 +5,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="description"
-    content="Iron Fit Store: equipa tu gimnasio a tu medida con barras, discos, mancuernas y racks para entrenar."
-  >
+  <meta name="description"
+    content="Iron Fit Store: equipa tu gimnasio a tu medida con barras, discos, mancuernas y racks para entrenar.">
 
   <meta name="theme-color" content="#0b0b0b">
 
   <title>Iron Fit Store | Forja tu gimnasio</title>
 
   <!-- Bootstrap -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  >
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Estilos del proyecto: responsable Joce -->
   <link rel="stylesheet" href="css/styles.css">
@@ -38,11 +32,7 @@
       <nav class="navbar" aria-label="Navegación principal">
         <div class="navbar__contenido">
 
-          <a
-            class="navbar__logo"
-            href="#inicio"
-            aria-label="Iron Fit Store, ir al inicio"
-          >
+          <a class="navbar__logo" href="#inicio" aria-label="Iron Fit Store, ir al inicio">
             IRON FIT
           </a>
 
@@ -54,12 +44,7 @@
             <li><a href="#servicios">Asesoría</a></li>
           </ul>
 
-          <button
-            class="navbar__carrito"
-            id="btn-carrito"
-            type="button"
-            aria-label="Ver carrito de compras"
-          >
+          <button class="navbar__carrito" id="btn-carrito" type="button" aria-label="Ver carrito de compras">
             Carrito
             <span class="navbar__contador" id="carrito-contador">0</span>
           </button>
@@ -71,11 +56,12 @@
     <main>
 
       <!-- ================= HERO ================= -->
-      <section
-        class="hero"
-        id="inicio"
-        aria-labelledby="hero-titulo"
-      >
+
+      <section class="hero" id="inicio" aria-labelledby="hero-titulo">
+           <!-- Video de fondo del hero -->
+        <video class="hero__video" autoplay muted loop playsinline poster="img/hero.jpg" aria-hidden="true">
+          <source src="video/hero.mp4" type="video/mp4">
+        </video>
         <div class="hero__contenido">
 
           <p class="hero__subtitulo">
@@ -105,10 +91,7 @@
       </section>
 
       <!-- ================= BENEFICIOS ================= -->
-      <section
-        class="beneficios"
-        aria-labelledby="beneficios-titulo"
-      >
+      <section class="beneficios" aria-labelledby="beneficios-titulo">
         <h2 id="beneficios-titulo">
           EQUIPA TU ESPACIO
         </h2>
@@ -143,11 +126,7 @@
       </section>
 
       <!-- ================= CATEGORÍAS ================= -->
-      <section
-        class="categorias"
-        id="categorias"
-        aria-labelledby="categorias-titulo"
-      >
+      <section class="categorias" id="categorias" aria-labelledby="categorias-titulo">
         <div class="categorias__encabezado">
           <p class="hero__subtitulo">
             ENCUENTRA TU EQUIPO
@@ -204,11 +183,7 @@
       </section>
 
       <!-- ================= CONFIGURADOR ================= -->
-      <section
-        class="configurador"
-        id="configurador"
-        aria-labelledby="configurador-titulo"
-      >
+      <section class="configurador" id="configurador" aria-labelledby="configurador-titulo">
         <div class="configurador__contenido">
 
           <p class="configurador__etiqueta">
@@ -229,30 +204,17 @@
             <legend>1. ¿Cuánto espacio tienes?</legend>
 
             <label>
-              <input
-                type="radio"
-                name="espacio"
-                value="pequeno"
-                checked
-              >
+              <input type="radio" name="espacio" value="pequeno" checked>
               Pequeño
             </label>
 
             <label>
-              <input
-                type="radio"
-                name="espacio"
-                value="mediano"
-              >
+              <input type="radio" name="espacio" value="mediano">
               Mediano
             </label>
 
             <label>
-              <input
-                type="radio"
-                name="espacio"
-                value="amplio"
-              >
+              <input type="radio" name="espacio" value="amplio">
               Amplio
             </label>
           </fieldset>
@@ -262,39 +224,22 @@
             <legend>2. ¿Qué disciplina entrenas?</legend>
 
             <label>
-              <input
-                type="radio"
-                name="disciplina"
-                value="fuerza"
-                checked
-              >
+              <input type="radio" name="disciplina" value="fuerza" checked>
               Fuerza
             </label>
 
             <label>
-              <input
-                type="radio"
-                name="disciplina"
-                value="funcional"
-              >
+              <input type="radio" name="disciplina" value="funcional">
               Funcional
             </label>
 
             <label>
-              <input
-                type="radio"
-                name="disciplina"
-                value="cardio"
-              >
+              <input type="radio" name="disciplina" value="cardio">
               Cardio
             </label>
 
             <label>
-              <input
-                type="radio"
-                name="disciplina"
-                value="mixto"
-              >
+              <input type="radio" name="disciplina" value="mixto">
               Mixto
             </label>
           </fieldset>
@@ -307,15 +252,8 @@
               Presupuesto aproximado en MXN
             </label>
 
-            <input
-              id="presupuesto"
-              name="presupuesto"
-              type="number"
-              min="1000"
-              step="500"
-              value="30000"
-              placeholder="Ej. 30000"
-            >
+            <input id="presupuesto" name="presupuesto" type="number" min="1000" step="500" value="30000"
+              placeholder="Ej. 30000">
           </fieldset>
 
           <p class="configurador__nota">
@@ -331,11 +269,7 @@
       </section>
 
       <!-- ================= CATÁLOGO ================= -->
-      <section
-        class="catalogo"
-        id="catalogo"
-        aria-labelledby="catalogo-titulo"
-      >
+      <section class="catalogo" id="catalogo" aria-labelledby="catalogo-titulo">
         <div class="catalogo__encabezado">
 
           <p class="hero__subtitulo">
@@ -367,11 +301,7 @@
       </section>
 
       <!-- ================= CARRITO ================= -->
-      <aside
-        id="carrito"
-        class="carrito"
-        aria-labelledby="carrito-titulo"
-      >
+      <aside id="carrito" class="carrito" aria-labelledby="carrito-titulo">
         <div class="carrito__contenido">
 
           <h2 id="carrito-titulo">
@@ -387,11 +317,7 @@
             $<span id="carrito-total">0</span> MXN
           </p>
 
-          <button
-            class="carrito__vaciar"
-            id="btn-vaciar"
-            type="button"
-          >
+          <button class="carrito__vaciar" id="btn-vaciar" type="button">
             Vaciar carrito
           </button>
 
@@ -399,11 +325,7 @@
       </aside>
 
       <!-- ================= SERVICIOS ================= -->
-      <section
-        class="servicios"
-        id="servicios"
-        aria-labelledby="servicios-titulo"
-      >
+      <section class="servicios" id="servicios" aria-labelledby="servicios-titulo">
         <div class="servicios__contenido">
 
           <p class="servicios__etiqueta">
