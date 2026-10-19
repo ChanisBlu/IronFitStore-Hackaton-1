@@ -1,113 +1,110 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Iron Fit Store: equipo de fuerza para tu gimnasio en casa">
-  <title>Iron Fit Store</title>
+  <meta
+    name="description"
+    content="Iron Fit Store: equipo de fuerza para tu gimnasio en casa."
+  >
+  <title>Iron Fit Store | Equipo deportivo</title>
 
-  <!-- Bootstrap 5.3.8 (rejilla y componentes responsivos) -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Estilos propios del equipo (siempre después de Bootstrap) -->
+  <!-- Bootstrap: rejilla y componentes responsivos -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <!-- Estilos propios del equipo: responsable Joce -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
+  <div class="contenedor">
 
-  <!-- ===== NAVBAR (responsable: Víctor) ===== -->
-  
-  <!-- ===== NAVBAR (responsable: Víctor) ===== -->
-  <header id="encabezado">
-    <nav class="navbar" aria-label="Navegación principal">
-      <a class="navbar-brand" href="#inicio" aria-label="Iron Fit Store, ir al inicio">
-        Iron Fit Store
-      </a>
-
-      <ul class="navbar-nav">
-        <li>
-          <a href="#inicio">Inicio</a>
-        </li>
-        <li>
-          <a href="#catalogo">Catálogo</a>
-        </li>
-        <li>
-          <a href="#servicios">Servicios</a>
-        </li>
-      </ul>
-
-      <!-- El contador lo actualiza js/carrito.js -->
-      <button id="btn-carrito" type="button" aria-label="Ver carrito de compras">
-        Carrito (<span id="carrito-contador">0</span>)
-      </button>
-    </nav>
-  </header>
-
-  <main>
-    
-  <!-- ===== HERO (responsable: Víctor) ===== -->
-  <section id="inicio" aria-labelledby="titulo-principal">
-    <div class="hero-contenido">
-      <p class="hero-etiqueta">EQUIPA TU ENTRENAMIENTO</p>
-
-      <h1 id="titulo-principal">
-        Tu fuerza. Tu espacio. Tu progreso.
-      </h1>
-
-      <p class="hero-descripcion">
-        Encuentra el equipo ideal para llevar tu entrenamiento
-        al siguiente nivel, desde la comodidad de tu hogar.
-      </p>
-
-      <div class="hero-acciones">
-        <a class="btn-catalogo" href="#catalogo">
-          Explorar catálogo
-        </a>
-
-        <a class="btn-servicios" href="#servicios">
-          Conoce nuestros servicios
-        </a>
-      </div>
+    <!-- ===== ANUNCIO (responsable: Víctor) ===== -->
+    <div class="anuncio">
+      Equipa tu entrenamiento. Construye tu progreso.
     </div>
-  </section>
 
+    <!-- ===== NAVBAR (responsable: Víctor) ===== -->
+    <header>
+      <nav class="navbar" aria-label="Navegación principal">
+        <div class="navbar__contenido">
+          <a
+            class="navbar__logo"
+            href="#inicio"
+            aria-label="Iron Fit Store, ir al inicio"
+          >
+            Iron Fit Store
+          </a>
 
-    <!-- ===== CATÁLOGO (las cards las pinta js/productos.js, responsable: César) ===== -->
-    <section id="catalogo">
-      <h2>Catálogo</h2>
-      <!-- NO escribir cards a mano aquí: se generan con JS -->
-      <div id="productos" class="row"></div>
-    </section>
+          <ul class="navbar__links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#catalogo">Catálogo</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+          </ul>
 
-    <!-- ===== CARRITO (lo llena js/carrito.js, responsable: Isaac) ===== -->
-    <aside id="carrito">
-      <h2>Tu carrito</h2>
-      <ul id="carrito-lista"></ul>
-      <p>Total: $<span id="carrito-total">0</span> MXN</p>
-      <button id="btn-vaciar" type="button">Vaciar carrito</button>
-    </aside>
+          <!-- Isaac: el JavaScript actualiza el contador -->
+          <button
+            class="navbar__carrito"
+            id="btn-carrito"
+            type="button"
+            aria-label="Ver carrito de compras"
+          >
+            Carrito (
+            <span class="navbar__contador" id="carrito-contador">0</span>
+            )
+          </button>
+        </div>
+      </nav>
+    </header>
 
-    
-    <!-- ===== SERVICIOS / NOSOTROS (responsable: Víctor) ===== -->
-    <section id="servicios" aria-labelledby="titulo-servicios">
-      <div class="servicios-contenido">
-        <p class="servicios-etiqueta">MÁS QUE EQUIPO DEPORTIVO</p>
+    <main>
+      <!-- ===== HERO (responsable: Víctor) ===== -->
+      <section class="hero" id="inicio" aria-labelledby="hero-titulo">
+        <div class="hero__contenido">
+          <p class="hero__subtitulo">EQUIPA TU ENTRENAMIENTO</p>
 
-        <h2 id="titulo-servicios">Entrena a tu manera</h2>
+          <h1 class="hero__titulo" id="hero-titulo">
+            Tu fuerza. Tu espacio. Tu progreso.
+          </h1>
 
-        <p class="servicios-descripcion">
-          En Iron Fit Store queremos ayudarte a construir tu espacio de
-          entrenamiento con equipo que se adapte a tus objetivos.
-        </p>
+          <p class="hero__descripcion">
+            Encuentra el equipo ideal para llevar tu entrenamiento
+            al siguiente nivel, desde la comodidad de tu hogar.
+          </p>
 
-        <div class="servicios-lista">
-          <article class="servicio">
+          <div class="hero__acciones">
+            <a class="hero__boton" href="#catalogo">
+              Explorar catálogo
+            </a>
+
+            <a class="hero__enlace" href="#servicios">
+              Conoce nuestros servicios
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== BENEFICIOS (responsable: Víctor) ===== -->
+      <section
+        class="beneficios"
+        aria-labelledby="beneficios-titulo"
+      >
+        <h2 id="beneficios-titulo">Entrena a tu manera</h2>
+
+        <div class="beneficios__lista">
+          <article class="beneficio">
             <h3>Equipo para tu entrenamiento</h3>
             <p>
-              Encuentra barras, mancuernas y accesorios para complementar
-              tus rutinas.
+              Encuentra barras, mancuernas y accesorios para
+              complementar tus rutinas.
             </p>
           </article>
 
-          <article class="servicio">
+          <article class="beneficio">
             <h3>Entrena desde casa</h3>
             <p>
               Equipa tu espacio y trabaja para alcanzar tus objetivos
@@ -115,26 +112,101 @@
             </p>
           </article>
 
-          <article class="servicio">
+          <article class="beneficio">
             <h3>Compra sencilla</h3>
             <p>
-              Explora el catálogo, agrega productos al carrito y consulta
-              el total de tu compra.
+              Explora el catálogo, agrega productos al carrito y
+              consulta el total de tu compra.
             </p>
           </article>
         </div>
+      </section>
+
+      <!-- ===== CATEGORÍAS (contenido inicial) ===== -->
+      <section
+        class="categorias"
+        aria-labelledby="categorias-titulo"
+      >
+        <h2 id="categorias-titulo">Encuentra tu equipo</h2>
+
+        <div class="categorias__lista">
+          <a class="categoria" href="#catalogo">Barras</a>
+          <a class="categoria" href="#catalogo">Mancuernas</a>
+          <a class="categoria" href="#catalogo">Discos</a>
+          <a class="categoria" href="#catalogo">Accesorios</a>
+        </div>
+      </section>
+
+      <!-- ===== CATÁLOGO (responsable: César) ===== -->
+      <section id="catalogo" aria-labelledby="catalogo-titulo">
+        <h2 id="catalogo-titulo">Nuestro catálogo</h2>
+        <p>Descubre el equipo para tu próximo entrenamiento.</p>
+
+        <!-- César genera las tarjetas mediante JavaScript -->
+        <div id="productos" class="grid row"></div>
+      </section>
+
+      <!-- ===== CARRITO (responsable: Isaac) ===== -->
+      <aside id="carrito" aria-labelledby="carrito-titulo">
+        <h2 id="carrito-titulo">Tu carrito</h2>
+
+        <ul id="carrito-lista"></ul>
+
+        <p>
+          Total:
+          $<span id="carrito-total">0</span> MXN
+        </p>
+
+        <button id="btn-vaciar" type="button">
+          Vaciar carrito
+        </button>
+      </aside>
+
+      <!-- ===== SERVICIOS / NOSOTROS (responsable: Víctor) ===== -->
+      <section
+        id="servicios"
+        aria-labelledby="servicios-titulo"
+      >
+        <div class="servicios__contenido">
+          <p class="servicios__etiqueta">MÁS QUE EQUIPO DEPORTIVO</p>
+
+          <h2 id="servicios-titulo">Nuestro compromiso contigo</h2>
+
+          <p class="servicios__descripcion">
+            En Iron Fit Store queremos ayudarte a construir tu espacio
+            de entrenamiento con equipo que se adapte a tus objetivos.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===== FOOTER (responsable: Víctor) ===== -->
+    <footer class="footer" id="pie-pagina">
+      <div class="footer__contenido">
+        <div class="footer__marca">
+          <a href="#inicio">Iron Fit Store</a>
+          <p>Tu fuerza. Tu espacio. Tu progreso.</p>
+        </div>
+
+        <nav aria-label="Navegación del pie de página">
+          <ul class="footer__links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#catalogo">Catálogo</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer__proyecto">
+          <p>Hackatón 1 · Generation México CH73</p>
+          <p>Proyecto académico · 2026</p>
+        </div>
       </div>
-    </section>
+    </footer>
 
+  </div>
 
-  <!-- ===== FOOTER (responsable: Víctor) ===== -->
-  <footer>
-    <p>Iron Fit Store · Hackatón 1 · Generation México CH73</p>
-  </footer>
-
-  <!-- Bootstrap JS -->
+  <!-- ===== SCRIPTS: conservar el orden del equipo ===== -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Scripts del equipo: el ORDEN importa (datos, carrito, arranque) -->
   <script src="js/productos.js"></script>
   <script src="js/carrito.js"></script>
   <script src="js/main.js"></script>
