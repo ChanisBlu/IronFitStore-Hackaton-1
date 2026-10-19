@@ -1,67 +1,519 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Iron Fit Store: equipo de fuerza para tu gimnasio en casa">
-  <title>Iron Fit Store</title>
 
-  <!-- Bootstrap 5.3.8 (rejilla y componentes responsivos) -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Estilos propios del equipo (siempre después de Bootstrap) -->
+  <meta
+    name="description"
+    content="Iron Fit Store: equipa tu gimnasio a tu medida con barras, discos, mancuernas, racks y accesorios para entrenar."
+  >
+
+  <meta name="theme-color" content="#0b0b0b">
+
+  <title>Iron Fit Store | Forja tu gimnasio</title>
+
+  <!-- Bootstrap -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <!-- Estilos del proyecto: responsable Joce -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
+  <div class="contenedor">
 
-  <!-- ===== NAVBAR (responsable: Víctor) ===== -->
-  <header>
-    <nav class="navbar">
-      <a class="navbar-brand" href="#inicio">Iron Fit Store</a>
-      <!-- Contador del carrito: lo actualiza js/carrito.js -->
-      <button id="btn-carrito" type="button">
-        Carrito (<span id="carrito-contador">0</span>)
-      </button>
-    </nav>
-  </header>
+    <!-- ================= ANUNCIO ================= -->
+    <div class="anuncio">
+      Equipa tu entrenamiento. Construye tu progreso.
+    </div>
 
-  <main>
-    <!-- ===== HERO (responsable: Víctor) ===== -->
-    <section id="inicio">
-      <h1>Iron Fit Store</h1>
-      <p>Eslogan aquí</p>
-    </section>
+    <!-- ================= NAVEGACIÓN ================= -->
+    <header>
+      <nav class="navbar" aria-label="Navegación principal">
+        <div class="navbar__contenido">
 
-    <!-- ===== CATÁLOGO (las cards las pinta js/productos.js, responsable: César) ===== -->
-    <section id="catalogo">
-      <h2>Catálogo</h2>
-      <!-- NO escribir cards a mano aquí: se generan con JS -->
-      <div id="productos" class="row"></div>
-    </section>
+          <a
+            class="navbar__logo"
+            href="#inicio"
+            aria-label="Iron Fit Store, ir al inicio"
+          >
+            IRON FIT
+          </a>
 
-    <!-- ===== CARRITO (lo llena js/carrito.js, responsable: Isaac) ===== -->
-    <aside id="carrito">
-      <h2>Tu carrito</h2>
-      <ul id="carrito-lista"></ul>
-      <p>Total: $<span id="carrito-total">0</span> MXN</p>
-      <button id="btn-vaciar" type="button">Vaciar carrito</button>
-    </aside>
+          <ul class="navbar__links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#categorias">Categorías</a></li>
+            <li><a href="#catalogo">Catálogo</a></li>
+            <li><a href="#configurador">Arma tu gimnasio</a></li>
+            <li><a href="#servicios">Asesoría</a></li>
+          </ul>
 
-    <!-- ===== SERVICIOS / NOSOTROS (responsable: Víctor) ===== -->
-    <section id="servicios">
-      <h2>Servicios</h2>
-    </section>
-  </main>
+          <button
+            class="navbar__carrito"
+            id="btn-carrito"
+            type="button"
+            aria-label="Ver carrito de compras"
+          >
+            Carrito
+            <span class="navbar__contador" id="carrito-contador">0</span>
+          </button>
 
-  <!-- ===== FOOTER (responsable: Víctor) ===== -->
-  <footer>
-    <p>Iron Fit Store · Hackatón 1 · Generation México CH73</p>
-  </footer>
+        </div>
+      </nav>
+    </header>
 
-  <!-- Bootstrap JS -->
+    <main>
+
+      <!-- ================= HERO ================= -->
+      <section
+        class="hero"
+        id="inicio"
+        aria-labelledby="hero-titulo"
+      >
+        <div class="hero__contenido">
+
+          <p class="hero__subtitulo">
+            EQUIPA TU ENTRENAMIENTO
+          </p>
+
+          <h1 class="hero__titulo" id="hero-titulo">
+            FORJA TU GIMNASIO A TU MEDIDA
+          </h1>
+
+          <p class="hero__descripcion">
+            El equipo ideal para alcanzar tus objetivos.
+            Diseña tu espacio, elige tus accesorios y lleva
+            tu entrenamiento al siguiente nivel.
+          </p>
+
+          <div class="hero__acciones">
+            <a class="hero__boton" href="#configurador">
+              Arma tu gimnasio
+            </a>
+
+            <a class="hero__enlace" href="#catalogo">
+              Ver catálogo
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= BENEFICIOS ================= -->
+      <section
+        class="beneficios"
+        aria-labelledby="beneficios-titulo"
+      >
+        <h2 id="beneficios-titulo">
+          EQUIPA TU ESPACIO
+        </h2>
+
+        <div class="beneficios__lista">
+
+          <article class="beneficio">
+            <h3>Equipo de calidad</h3>
+            <p>
+              Encuentra barras, discos, mancuernas y accesorios
+              para complementar tus entrenamientos.
+            </p>
+          </article>
+
+          <article class="beneficio">
+            <h3>Entrena a tu ritmo</h3>
+            <p>
+              Construye un espacio de entrenamiento adaptado
+              a tus objetivos y necesidades.
+            </p>
+          </article>
+
+          <article class="beneficio">
+            <h3>Compra fácilmente</h3>
+            <p>
+              Explora los productos, agrega tus favoritos
+              al carrito y consulta el total de tu compra.
+            </p>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ================= CATEGORÍAS ================= -->
+      <section
+        class="categorias"
+        id="categorias"
+        aria-labelledby="categorias-titulo"
+      >
+        <div class="categorias__encabezado">
+          <p class="hero__subtitulo">ENCUENTRA TU EQUIPO</p>
+          <h2 id="categorias-titulo">
+            COMPRA POR CATEGORÍA
+          </h2>
+          <p>
+            Explora las opciones para construir tu gimnasio ideal.
+          </p>
+        </div>
+
+        <div class="categorias__lista">
+
+          <a class="categoria" href="#catalogo">
+            <span>01</span>
+            <h3>Barras</h3>
+            <p>Entrenamiento de fuerza</p>
+          </a>
+
+          <a class="categoria" href="#catalogo">
+            <span>02</span>
+            <h3>Discos</h3>
+            <p>Agrega peso a tu rutina</p>
+          </a>
+
+          <a class="categoria" href="#catalogo">
+            <span>03</span>
+            <h3>Mancuernas</h3>
+            <p>Versatilidad y control</p>
+          </a>
+
+          <a class="categoria" href="#catalogo">
+            <span>04</span>
+            <h3>Racks</h3>
+            <p>Entrena con estabilidad</p>
+          </a>
+
+          <a class="categoria" href="#catalogo">
+            <span>05</span>
+            <h3>Bancos</h3>
+            <p>Soporte para tus ejercicios</p>
+          </a>
+
+          <a class="categoria" href="#catalogo">
+            <span>06</span>
+            <h3>Cardio</h3>
+            <p>Mejora tu resistencia</p>
+          </a>
+
+          <a class="categoria" href="#catalogo">
+            <span>07</span>
+            <h3>Accesorios</h3>
+            <p>Complementa tu equipo</p>
+          </a>
+
+          <a class="categoria" href="#catalogo">
+            <span>08</span>
+            <h3>Pisos</h3>
+            <p>Prepara tu espacio</p>
+          </a>
+
+        </div>
+      </section>
+
+      <!-- ================= CONFIGURADOR ================= -->
+      <section
+        class="configurador"
+        id="configurador"
+        aria-labelledby="configurador-titulo"
+      >
+        <div class="configurador__contenido">
+
+          <p class="configurador__etiqueta">
+            CREA TU ESPACIO IDEAL
+          </p>
+
+          <h2 id="configurador-titulo">
+            ARMA TU HOME GYM EN 3 PASOS
+          </h2>
+
+          <p>
+            Define tus necesidades y descubre una propuesta
+            para comenzar a construir tu gimnasio.
+          </p>
+
+          <!-- Paso 1 -->
+          <fieldset class="configurador__paso">
+            <legend>1. ¿Cuánto espacio tienes?</legend>
+
+            <label>
+              <input
+                type="radio"
+                name="espacio"
+                value="pequeno"
+                checked
+              >
+              Pequeño
+            </label>
+
+            <label>
+              <input
+                type="radio"
+                name="espacio"
+                value="mediano"
+              >
+              Mediano
+            </label>
+
+            <label>
+              <input
+                type="radio"
+                name="espacio"
+                value="amplio"
+              >
+              Amplio
+            </label>
+          </fieldset>
+
+          <!-- Paso 2 -->
+          <fieldset class="configurador__paso">
+            <legend>2. ¿Qué disciplina entrenas?</legend>
+
+            <label>
+              <input
+                type="radio"
+                name="disciplina"
+                value="fuerza"
+                checked
+              >
+              Fuerza
+            </label>
+
+            <label>
+              <input
+                type="radio"
+                name="disciplina"
+                value="funcional"
+              >
+              Funcional
+            </label>
+
+            <label>
+              <input
+                type="radio"
+                name="disciplina"
+                value="cardio"
+              >
+              Cardio
+            </label>
+
+            <label>
+              <input
+                type="radio"
+                name="disciplina"
+                value="mixto"
+              >
+              Mixto
+            </label>
+          </fieldset>
+
+          <!-- Paso 3 -->
+          <fieldset class="configurador__paso">
+            <legend>3. ¿Cuál es tu presupuesto?</legend>
+
+            <label for="presupuesto">
+              Presupuesto aproximado en MXN
+            </label>
+
+            <input
+              id="presupuesto"
+              name="presupuesto"
+              type="number"
+              min="1000"
+              step="500"
+              value="30000"
+              placeholder="Ej. 30000"
+            >
+          </fieldset>
+
+          <p class="configurador__nota">
+            Esta sección es una guía inicial. La selección
+            no genera una cotización automática.
+          </p>
+
+          <a class="hero__boton" href="#catalogo">
+            Explorar equipo
+          </a>
+
+        </div>
+      </section>
+
+      <!-- ================= CATÁLOGO ================= -->
+      <section
+        class="catalogo"
+        id="catalogo"
+        aria-labelledby="catalogo-titulo"
+      >
+        <div class="catalogo__encabezado">
+
+          <p class="hero__subtitulo">
+            EQUIPA TU ENTRENAMIENTO
+          </p>
+
+          <h2 id="catalogo-titulo">
+            LO MÁS VENDIDO
+          </h2>
+
+          <p>
+            Descubre algunos de los productos para tu gimnasio.
+          </p>
+
+        </div>
+
+        <!--
+          César: renderizar los productos aquí.
+          Conservar el ID y la clase para la integración.
+        -->
+        <div id="productos" class="grid row"></div>
+
+        <div class="catalogo__acciones">
+          <a class="hero__enlace" href="#productos">
+            Explorar productos
+          </a>
+        </div>
+      </section>
+
+      <!-- ================= CARRITO ================= -->
+      <aside
+        id="carrito"
+        class="carrito"
+        aria-labelledby="carrito-titulo"
+      >
+        <div class="carrito__contenido">
+
+          <h2 id="carrito-titulo">
+            TU CARRITO
+          </h2>
+
+          <ul id="carrito-lista">
+            <!-- Isaac: JavaScript inserta los productos agregados -->
+          </ul>
+
+          <p class="carrito__total">
+            Total:
+            $<span id="carrito-total">0</span> MXN
+          </p>
+
+          <button
+            class="carrito__vaciar"
+            id="btn-vaciar"
+            type="button"
+          >
+            Vaciar carrito
+          </button>
+
+        </div>
+      </aside>
+
+      <!-- ================= SERVICIOS ================= -->
+      <section
+        class="servicios"
+        id="servicios"
+        aria-labelledby="servicios-titulo"
+      >
+        <div class="servicios__contenido">
+
+          <p class="servicios__etiqueta">
+            ASESORÍA COMPLETA PARA TU PROYECTO
+          </p>
+
+          <h2 id="servicios-titulo">
+            LLEVA TU GIMNASIO AL SIGUIENTE NIVEL
+          </h2>
+
+          <p class="servicios__descripcion">
+            Te acompañamos en la selección y organización del
+            equipo para construir un espacio adaptado a tus metas.
+          </p>
+
+          <div class="servicios__lista">
+
+            <article class="servicio">
+              <span class="servicio__numero">01</span>
+              <h3>Diseña tu gimnasio en 3D</h3>
+              <p>
+                Planea la distribución de tu equipo y aprovecha
+                mejor el espacio disponible.
+              </p>
+            </article>
+
+            <article class="servicio">
+              <span class="servicio__numero">02</span>
+              <h3>Servicio técnico</h3>
+              <p>
+                Considera el mantenimiento y cuidado de tus
+                equipos de entrenamiento.
+              </p>
+            </article>
+
+            <article class="servicio">
+              <span class="servicio__numero">03</span>
+              <h3>Desarrolla tu proyecto</h3>
+              <p>
+                Organiza tus necesidades de equipamiento
+                para avanzar hacia tu gimnasio ideal.
+              </p>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer" id="pie-pagina">
+      <div class="footer__contenido">
+
+        <div class="footer__marca">
+          <a href="#inicio" class="navbar__logo">
+            IRON FIT
+          </a>
+
+          <p>
+            Tu fuerza. Tu espacio. Tu progreso.
+          </p>
+
+          <p>
+            Equipa tu entrenamiento con Iron Fit Store.
+          </p>
+        </div>
+
+        <nav aria-label="Enlaces de la tienda">
+          <h2>TIENDA</h2>
+          <ul class="footer__links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#categorias">Categorías</a></li>
+            <li><a href="#catalogo">Catálogo</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-label="Información y servicios">
+          <h2>AYUDA</h2>
+          <ul class="footer__links">
+            <li><a href="#servicios">Asesoría</a></li>
+            <li><a href="#configurador">Arma tu gimnasio</a></li>
+            <li><a href="#carrito">Carrito</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer__proyecto">
+          <h2>IRON FIT STORE</h2>
+          <p>Hackatón 1 · Generation México CH73</p>
+          <p>Proyecto académico · 2026</p>
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ================= SCRIPTS ================= -->
+  <!-- Mantener el orden acordado por el equipo -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Scripts del equipo: el ORDEN importa (datos, carrito, arranque) -->
   <script src="js/productos.js"></script>
   <script src="js/carrito.js"></script>
   <script src="js/main.js"></script>
+
 </body>
 </html>
