@@ -1,4 +1,3 @@
-
 # Iron Fit Store
 
 Landing page interactiva de una tienda de equipamiento deportivo enfocada en fuerza y entrenamiento en casa.
@@ -69,10 +68,10 @@ IronFitStore-Hackaton-1/
 
 | Integrante | Responsabilidad | Archivos principales |
 |---|---|---|
-| Víctor Caicedo | Estructura HTML e integración final | `index.html`, `README.md` |
-| Joce Bernal | Diseño visual, CSS, responsividad y animaciones | `css/styles.css` |
-| César Luna | Datos del catálogo y tarjetas de productos | `js/productos.js` |
-| Isaac | Carrito, persistencia y pruebas | `js/carrito.js`, `tests/carrito.test.js` |
+| Víctor Manuel Montaño | Estructura HTML e integración final | `index.html`, `README.md` |
+| Jocelin Bernal | Diseño visual, CSS, responsividad y animaciones | `css/styles.css` |
+| César Nápoles | Datos del catálogo y tarjetas de productos | `js/productos.js` |
+| Isaac Razo | Carrito, persistencia y pruebas | `js/carrito.js`, `tests/carrito.test.js` |
 
 ## Estado del proyecto
 
