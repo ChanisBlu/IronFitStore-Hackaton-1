@@ -14,22 +14,61 @@
 <body>
 
   <!-- ===== NAVBAR (responsable: Víctor) ===== -->
-  <header>
-    <nav class="navbar">
-      <a class="navbar-brand" href="#inicio">Iron Fit Store</a>
-      <!-- Contador del carrito: lo actualiza js/carrito.js -->
-      <button id="btn-carrito" type="button">
+  
+  <!-- ===== NAVBAR (responsable: Víctor) ===== -->
+  <header id="encabezado">
+    <nav class="navbar" aria-label="Navegación principal">
+      <a class="navbar-brand" href="#inicio" aria-label="Iron Fit Store, ir al inicio">
+        Iron Fit Store
+      </a>
+
+      <ul class="navbar-nav">
+        <li>
+          <a href="#inicio">Inicio</a>
+        </li>
+        <li>
+          <a href="#catalogo">Catálogo</a>
+        </li>
+        <li>
+          <a href="#servicios">Servicios</a>
+        </li>
+      </ul>
+
+      <!-- El contador lo actualiza js/carrito.js -->
+      <button id="btn-carrito" type="button" aria-label="Ver carrito de compras">
         Carrito (<span id="carrito-contador">0</span>)
       </button>
     </nav>
   </header>
 
   <main>
-    <!-- ===== HERO (responsable: Víctor) ===== -->
-    <section id="inicio">
-      <h1>Iron Fit Store</h1>
-      <p>Eslogan aquí</p>
-    </section>
+    
+  <!-- ===== HERO (responsable: Víctor) ===== -->
+  <section id="inicio" aria-labelledby="titulo-principal">
+    <div class="hero-contenido">
+      <p class="hero-etiqueta">EQUIPA TU ENTRENAMIENTO</p>
+
+      <h1 id="titulo-principal">
+        Tu fuerza. Tu espacio. Tu progreso.
+      </h1>
+
+      <p class="hero-descripcion">
+        Encuentra el equipo ideal para llevar tu entrenamiento
+        al siguiente nivel, desde la comodidad de tu hogar.
+      </p>
+
+      <div class="hero-acciones">
+        <a class="btn-catalogo" href="#catalogo">
+          Explorar catálogo
+        </a>
+
+        <a class="btn-servicios" href="#servicios">
+          Conoce nuestros servicios
+        </a>
+      </div>
+    </div>
+  </section>
+
 
     <!-- ===== CATÁLOGO (las cards las pinta js/productos.js, responsable: César) ===== -->
     <section id="catalogo">
@@ -46,11 +85,47 @@
       <button id="btn-vaciar" type="button">Vaciar carrito</button>
     </aside>
 
+    
     <!-- ===== SERVICIOS / NOSOTROS (responsable: Víctor) ===== -->
-    <section id="servicios">
-      <h2>Servicios</h2>
+    <section id="servicios" aria-labelledby="titulo-servicios">
+      <div class="servicios-contenido">
+        <p class="servicios-etiqueta">MÁS QUE EQUIPO DEPORTIVO</p>
+
+        <h2 id="titulo-servicios">Entrena a tu manera</h2>
+
+        <p class="servicios-descripcion">
+          En Iron Fit Store queremos ayudarte a construir tu espacio de
+          entrenamiento con equipo que se adapte a tus objetivos.
+        </p>
+
+        <div class="servicios-lista">
+          <article class="servicio">
+            <h3>Equipo para tu entrenamiento</h3>
+            <p>
+              Encuentra barras, mancuernas y accesorios para complementar
+              tus rutinas.
+            </p>
+          </article>
+
+          <article class="servicio">
+            <h3>Entrena desde casa</h3>
+            <p>
+              Equipa tu espacio y trabaja para alcanzar tus objetivos
+              a tu propio ritmo.
+            </p>
+          </article>
+
+          <article class="servicio">
+            <h3>Compra sencilla</h3>
+            <p>
+              Explora el catálogo, agrega productos al carrito y consulta
+              el total de tu compra.
+            </p>
+          </article>
+        </div>
+      </div>
     </section>
-  </main>
+
 
   <!-- ===== FOOTER (responsable: Víctor) ===== -->
   <footer>
