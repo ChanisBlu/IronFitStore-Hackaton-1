@@ -1,33 +1,646 @@
-/* =========================================================
-   Iron Fit Store · estilos propios (responsable: Joce)
-   Orden: 1 Variables, 2 Base, 3 Navbar, 4 Hero, 5 Catálogo,
+/* ==========================================================
+Iron Fit Store · estilos propios (responsable: Joce)
+Orden: 1 Variables, 2 Base, 3 Navbar, 4 Hero, 5 Catálogo,
           6 Carrito, 7 Servicios, 8 Footer, 9 Animaciones,
           10 Responsivo
-   ========================================================= */
+Fuentes — agregar en el <head> del HTML:
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+   ========================================================== */
 
 /* 1. Variables: cambiar la paleta SOLO aquí */
 :root {
-  --color-principal: #111111;  /* fondo oscuro (ejemplo) */
-  --color-acento: #e63946;     /* botones y detalles (ejemplo) */
-  --color-texto: #f5f5f5;
-  --fuente-titulos: sans-serif;
-  --fuente-texto: sans-serif;
+  /* Paleta oscura */
+  --color-fondo: #0d0d0d;
+  --color-superficie: #1a1a1a;
+  --color-borde: #2e2e2e;
+  --color-texto: #ffffff;
+  --color-texto-suave: #b5b5b5;
+  --color-acento: #bb0010;        /* SOLO como relleno (botones, badges); como texto contrasta poco */
+
+  /* Tarjetas de producto claras (referencia Ironside) */
+  --color-card: #fafafa;
+  --color-card-texto: #0d0d0d;
+  --color-card-suave: #5c5c5c;
+
+  /* Tipografía */
+  --fuente-titulo: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+  --fuente: "Inter", "Helvetica Neue", Arial, sans-serif;
+
+  /* Espaciado y formas */
+  --espacio-s: 0.5rem;
+  --espacio-m: 1rem;
+  --espacio-l: 2rem;
+  --espacio-xl: 4rem;
+  --radio: 8px;
+  --radio-l: 16px;
+  --radio-pill: 999px;
+  --transicion: 0.25s ease;
+
+  /* Ancho de cada video del carrusel */
+  --slide-ancho: 220px;
 }
 
-/* 2. Base */
+/* 2. Base (reset, contenedor y componentes reutilizables) */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* 3. Navbar */
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: var(--fuente);
+  line-height: 1.5;
+}
+
+img, video { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+/* Neutraliza márgenes y sangrías que Bootstrap (reboot) vuelve a aplicar */
+h1, h2, h3, h4, h5, h6, p { margin: 0; }
+ul { padding: 0; }
+
+/* Foco visible para teclado (accesibilidad) */
+:focus-visible { outline: 3px solid var(--color-texto); outline-offset: 3px; }
+
+/* Contenedor central reutilizable */
+.contenedor {
+  width: min(1200px, 92%);
+  margin-inline: auto;
+}
+
+/* Botón principal (rojo) + variantes */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem var(--espacio-l);
+  background: var(--color-acento);
+  color: var(--color-texto);
+  border: 2px solid var(--color-acento);
+  border-radius: var(--radio-pill);
+  font: 600 0.85rem var(--fuente);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform var(--transicion), background var(--transicion), color var(--transicion);
+
+  /* Variables de Bootstrap: evitan que sus estados :hover/:active dejen el botón transparente */
+  --bs-btn-hover-color: var(--color-texto);
+  --bs-btn-hover-bg: var(--color-acento);
+  --bs-btn-hover-border-color: var(--color-acento);
+  --bs-btn-active-color: var(--color-texto);
+  --bs-btn-active-bg: var(--color-acento);
+  --bs-btn-active-border-color: var(--color-acento);
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:focus-visible { outline: 3px solid var(--color-texto); outline-offset: 3px; }   /* Bootstrap lo anula */
+.btn--outline {
+  background: transparent;
+  border-color: var(--color-texto);
+  --bs-btn-hover-color: var(--color-fondo);
+  --bs-btn-hover-bg: var(--color-texto);
+  --bs-btn-hover-border-color: var(--color-texto);
+  --bs-btn-active-bg: var(--color-texto);
+  --bs-btn-active-color: var(--color-fondo);
+  --bs-btn-active-border-color: var(--color-texto);
+}
+.btn--outline:hover { background: var(--color-texto); color: var(--color-fondo); }
+.btn--oscuro {
+  background: var(--color-fondo);
+  border-color: var(--color-fondo);
+  --bs-btn-hover-border-color: var(--color-acento);
+  --bs-btn-active-bg: var(--color-acento);
+  --bs-btn-active-border-color: var(--color-acento);
+}
+.btn--oscuro:hover { background: var(--color-acento); border-color: var(--color-acento); }
+.btn--bloque { width: 100%; }
+
+/* Etiqueta de descuento / novedad */
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  background: var(--color-acento);
+  color: var(--color-texto);
+  border-radius: var(--radio-pill);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* Chip seleccionable (filtros y Builder) */
+.chip {
+  padding: 0.5rem 1.1rem;
+  background: transparent;
+  color: var(--color-texto);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-pill);
+  font: 600 0.9rem var(--fuente);
+  cursor: pointer;
+  transition: background var(--transicion), border-color var(--transicion);
+}
+.chip:hover { border-color: var(--color-texto); }
+.chip--activo { background: var(--color-acento); border-color: var(--color-acento); }
+.chips { display: flex; flex-wrap: wrap; gap: var(--espacio-s); }
+
+/* Panel base: un solo estilo para todas las cajas oscuras */
+.panel,
+.beneficio,
+.paso,
+.resumen,
+.asesoria__card {
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-l);
+  padding: var(--espacio-l);
+}
+
+/* Disco de pesa: motivo de marca (logo, contador, decoración) */
+.disco {
+  display: inline-block;
+  width: 1.4em;
+  height: 1.4em;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-fondo) 0 22%, var(--color-acento) 24% 100%);
+}
+
+/* Encabezado de sección */
+.seccion { padding-block: var(--espacio-xl); }
+.seccion__encabezado { margin-bottom: var(--espacio-l); }
+.etiqueta {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-s);
+  margin-bottom: var(--espacio-s);
+  color: var(--color-texto-suave);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.etiqueta::before { content: ""; width: 32px; height: 4px; background: var(--color-acento); }
+.titulo {
+  font-family: var(--fuente-titulo);
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* 3. Navbar (incluye barra de anuncio) */
+/* Barra de anuncio superior */
+.anuncio {
+  background: var(--color-acento);
+  color: var(--color-texto);
+  text-align: center;
+  padding: var(--espacio-s);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Navbar fija con logo, enlaces y contador del carrito */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0;                      /* Bootstrap agrega padding a .navbar */
+  background: var(--color-fondo);
+  border-bottom: 1px solid var(--color-borde);
+}
+.navbar__contenido {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--espacio-m);
+}
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-s);
+  font-family: var(--fuente-titulo);
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.navbar__logo::before {            /* disco de pesa como isotipo */
+  content: "";
+  width: 1.1em;
+  height: 1.1em;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-fondo) 0 22%, var(--color-acento) 24% 100%);
+}
+.navbar__links { display: none; gap: var(--espacio-l); }
+.navbar__links a {
+  color: var(--color-texto-suave);
+  font-weight: 600;
+  transition: color var(--transicion);
+}
+.navbar__links a:hover { color: var(--color-texto); }
+.navbar__carrito { position: relative; background: none; border: 0; color: inherit; font-size: 1.4rem; cursor: pointer; }
+.navbar__contador {
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  min-width: 20px;
+  padding: 0 4px;
+  background: var(--color-acento);
+  border-radius: var(--radio-pill);
+  font-size: 0.75rem;
+  text-align: center;
+}
 
 /* 4. Hero */
+/* Hero: titular + barra cargada con discos */
+.hero {
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(13, 13, 13, 0.95) 35%, rgba(13, 13, 13, 0.6)),
+    url("../img/hero.jpg") center / cover no-repeat,
+    var(--color-superficie);
+}
+.hero__contenido {
+  display: grid;
+  gap: var(--espacio-l);
+  align-items: center;
+  padding-block: var(--espacio-xl);
+}
+.hero__titulo {
+  margin-bottom: var(--espacio-m);
+  font-family: var(--fuente-titulo);
+  font-size: clamp(3rem, 12vw, 6.5rem);
+  font-weight: 800;
+  line-height: 0.92;
+  text-transform: uppercase;
+  animation: aparecer 0.8s ease both;
+}
+.hero__contorno {                  /* línea con solo contorno */
+  display: block;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-texto);
+}
+.hero__subtitulo {
+  max-width: 42ch;
+  margin-bottom: var(--espacio-l);
+  color: var(--color-texto-suave);
+  animation: aparecer 0.8s 0.2s ease both;
+}
+.hero__acciones { display: flex; flex-wrap: wrap; gap: var(--espacio-m); }
 
-/* 5. Catálogo (cards de productos) */
+/* "Carga tu barra": barra olímpica con discos (todo en CSS) */
+.hero__visual { display: flex; flex-direction: column; align-items: center; gap: var(--espacio-m); }
+.barra { display: flex; align-items: center; width: 100%; }
+.barra__eje {
+  flex: 1;
+  height: 10px;
+  background: linear-gradient(#e6e6e6, #777);
+  border-radius: 6px;
+}
+.barra__discos { display: flex; align-items: center; gap: 3px; }
+.barra__disco {
+  width: 14px;
+  background: var(--color-acento);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 3px;
+}
+.barra__disco--grande { height: 130px; }
+.barra__disco--medio  { height: 95px; }
+.barra__disco--chico  { height: 60px; }
+.carga {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--espacio-m) var(--espacio-l);
+  background: rgba(26, 26, 26, 0.85);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-l);
+}
+.carga__peso { font-family: var(--fuente-titulo); font-size: 3rem; font-weight: 800; line-height: 1; }
+.carga__etiqueta { color: var(--color-texto-suave); font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; }
+
+/* 5. Catálogo (categorías, Builder, filtros, cards y carrusel de videos) */
+/* Categorías con imagen de fondo */
+.categorias { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--espacio-m); }
+.categoria {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  aspect-ratio: 4 / 3;
+  padding: var(--espacio-m);
+  overflow: hidden;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-l);
+  background: var(--color-superficie) center / cover no-repeat;
+  font-family: var(--fuente-titulo);
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: transform var(--transicion);
+}
+.categoria::before {               /* degradado para leer el nombre */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 40%, rgba(0, 0, 0, 0.85));
+}
+.categoria::after {                /* anillo de disco decorativo */
+  content: "";
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 110px;
+  height: 110px;
+  border: 14px solid var(--color-acento);
+  border-radius: 50%;
+  opacity: 0.35;
+}
+.categoria__nombre { position: relative; z-index: 1; }
+.categoria:hover { transform: scale(1.03); }
+
+/* IronFit Builder: arma tu home gym en 3 pasos */
+.builder { display: grid; gap: var(--espacio-m); }
+.paso__numero {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  margin-bottom: var(--espacio-s);
+  background: var(--color-acento);
+  border-radius: 50%;
+  font-family: var(--fuente-titulo);
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+.paso__titulo { margin-bottom: var(--espacio-m); font-family: var(--fuente-titulo); font-size: 1.5rem; text-transform: uppercase; }
+.rango { width: 100%; accent-color: var(--color-acento); }
+.rango__valor { margin-top: var(--espacio-s); font-family: var(--fuente-titulo); font-size: 1.8rem; font-weight: 700; }
+.resumen__lista li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--espacio-m);
+  padding-block: var(--espacio-s);
+  border-bottom: 1px solid var(--color-borde);
+}
+.resumen__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-block: var(--espacio-m);
+  font-family: var(--fuente-titulo);
+  font-size: 2.2rem;
+  font-weight: 800;
+}
+
+/* Filtros del catálogo (scroll horizontal en móvil) */
+.filtros {
+  display: flex;
+  gap: var(--espacio-s);
+  margin-bottom: var(--espacio-l);
+  padding-bottom: var(--espacio-s);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.filtros .chip { flex: none; }
+
+/* Cuadrícula de productos */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--espacio-m);
+}
+
+/* Card de producto CLARA (la pinta js/productos.js) */
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-card);
+  color: var(--color-card-texto);
+  border-radius: var(--radio-l);
+  overflow: hidden;
+  transition: transform var(--transicion), box-shadow var(--transicion);
+}
+.card:hover { transform: translateY(-6px); box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5); }
+.card__imagen {
+  width: 100%;
+  aspect-ratio: 1;
+  padding: var(--espacio-m);
+  object-fit: contain;
+  background: #ffffff;
+}
+.card__cuerpo {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--espacio-s);
+  padding: var(--espacio-m);
+}
+.card__categoria {
+  color: var(--color-card-suave);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.card__nombre {
+  font-family: var(--fuente-titulo);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+.card__descripcion { color: var(--color-card-suave); font-size: 0.9rem; }
+.card__precios { display: flex; flex-wrap: wrap; align-items: center; gap: var(--espacio-s); margin-top: auto; }  /* precios alineados abajo */
+.card__precio { font-family: var(--fuente-titulo); font-size: 2.25rem; font-weight: 700; line-height: 1; }
+.card__antes { color: var(--color-card-suave); font-size: 0.85rem; text-decoration: line-through; }
+
+/* Carrusel de videos (estilo coverflow de Ironside) */
+.carrusel { position: relative; overflow: hidden; padding-block: var(--espacio-l); }
+.carrusel__pista {
+  display: flex;
+  gap: var(--espacio-m);
+  padding-inline: calc(50% - var(--slide-ancho) / 2);   /* centra el primer y último video */
+  padding-block: var(--espacio-l);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.carrusel__pista::-webkit-scrollbar { display: none; }
+.carrusel__slide {
+  position: relative;
+  flex: 0 0 var(--slide-ancho);
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  border-radius: 24px;
+  background: var(--color-superficie);
+  opacity: 0.55;
+  transform: scale(0.88);
+  scroll-snap-align: center;
+  transition: opacity var(--transicion), transform var(--transicion);
+}
+.carrusel__slide.is-activo { opacity: 1; transform: scale(1); }   /* lo marca el JS */
+.carrusel__media { width: 100%; height: 100%; object-fit: cover; }   /* <video> o <img>/GIF */
+.carrusel__slide::after {          /* degradado para leer el pie del video */
+  content: "";
+  position: absolute;
+  inset: 40% 0 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  pointer-events: none;
+}
+
+/* Mejora: efecto 3D según la posición, solo CSS (Chrome, Edge, Safari reciente) */
+@supports (animation-timeline: view(inline)) {
+  .carrusel__slide {
+    opacity: 1;
+    transform: none;
+    animation: coverflow linear both;
+    animation-timeline: view(inline);
+  }
+}
+
+/* Barra inferior: flechas + producto del video actual */
+.carrusel__barra {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espacio-m);
+}
+.carrusel__flecha {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  color: var(--color-texto);
+  border: 1px solid var(--color-texto);
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background var(--transicion), color var(--transicion);
+}
+.carrusel__flecha:hover { background: var(--color-texto); color: var(--color-fondo); }
+.carrusel__producto {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-m);
+  min-width: 0;
+  padding: var(--espacio-s) var(--espacio-s) var(--espacio-s) var(--espacio-m);
+  background: var(--color-card);
+  color: var(--color-card-texto);
+  border-radius: var(--radio-pill);
+}
+.carrusel__miniatura { width: 44px; height: 44px; object-fit: contain; }
+.carrusel__info { min-width: 0; }
+.carrusel__nombre { overflow: hidden; font-size: 0.85rem; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.carrusel__precio { font-family: var(--fuente-titulo); font-size: 1.3rem; font-weight: 700; line-height: 1; }
 
 /* 6. Carrito */
+/* Panel lateral del carrito (lo pinta js/carrito.js; .is-abierto lo muestra) */
+.carrito {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  width: min(400px, 100%);
+  height: 100%;
+  padding: var(--espacio-l);
+  background: var(--color-superficie);
+  border-left: 1px solid var(--color-borde);
+  transform: translateX(100%);
+  transition: transform var(--transicion);
+}
+.carrito.is-abierto { transform: translateX(0); }
+.carrito__titulo { margin-bottom: var(--espacio-m); font-family: var(--fuente-titulo); font-size: 1.8rem; text-transform: uppercase; }
+.carrito__lista { flex: 1; overflow-y: auto; }
+.carrito__vacio { padding-block: var(--espacio-l); color: var(--color-texto-suave); text-align: center; }
+.carrito__item {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  gap: var(--espacio-m);
+  align-items: center;
+  padding-block: var(--espacio-m);
+  border-bottom: 1px solid var(--color-borde);
+}
+.carrito__imagen { width: 64px; height: 64px; object-fit: contain; background: #ffffff; border-radius: var(--radio); }
+.carrito__nombre { font-size: 0.9rem; font-weight: 600; }
+.carrito__cantidad { display: flex; align-items: center; gap: var(--espacio-s); }
+.carrito__cantidad button, .carrito__quitar {
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  color: var(--color-texto);
+  border: 1px solid var(--color-borde);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.carrito__total { display: flex; justify-content: space-between; margin-block: var(--espacio-m); font-family: var(--fuente-titulo); font-size: 2rem; font-weight: 800; }
+.carrito__error { margin-bottom: var(--espacio-m); padding: var(--espacio-s) var(--espacio-m); background: var(--color-acento); border-radius: var(--radio); font-size: 0.85rem; }  /* mensajes de error */
 
-/* 7. Servicios */
+/* 7. Servicios (beneficios y asesoría) */
+/* Franja de beneficios (envío, entrega, retiro) */
+.beneficios {
+  display: grid;
+  gap: var(--espacio-m);
+  padding-block: var(--espacio-l);
+  text-align: center;
+}
+
+/* Asesoría completa */
+.asesoria { display: grid; gap: var(--espacio-m); }
+.asesoria__titulo { margin-bottom: var(--espacio-s); font-family: var(--fuente-titulo); font-size: 1.6rem; text-transform: uppercase; }
+.asesoria__card p { color: var(--color-texto-suave); }
 
 /* 8. Footer */
+/* Footer */
+.footer {
+  margin-top: var(--espacio-l);
+  padding-block: var(--espacio-xl) var(--espacio-l);
+  background: var(--color-superficie);
+  border-top: 1px solid var(--color-borde);
+  color: var(--color-texto-suave);
+}
+.footer__columnas { display: grid; gap: var(--espacio-l); margin-bottom: var(--espacio-l); }
+.footer__titulo { margin-bottom: var(--espacio-s); color: var(--color-texto); font-family: var(--fuente-titulo); font-size: 1.2rem; text-transform: uppercase; }
+.footer__links li { padding-block: 0.2rem; }
+.footer__links a:hover { color: var(--color-texto); }
+.footer__legal { padding-top: var(--espacio-m); border-top: 1px solid var(--color-borde); font-size: 0.85rem; text-align: center; }
 
 /* 9. Animaciones */
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.card { animation: aparecer 0.5s ease both; }
 
-/* 10. Responsivo (celular primero) */
+/* Coverflow: 0% = entra por la derecha, 50% = centrado, 100% = sale por la izquierda */
+@keyframes coverflow {
+  0%   { opacity: 0.4; transform: perspective(900px) rotateY(-32deg) scale(0.8); }
+  50%  { opacity: 1;   transform: perspective(900px) rotateY(0) scale(1); }
+  100% { opacity: 0.4; transform: perspective(900px) rotateY(32deg) scale(0.8); }
+}
+
+/* Respeta a quien prefiere menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* 10. Responsivo (celular primero: lo anterior ya es base móvil) */
+/* Tablet */
+@media (min-width: 768px) {
+  :root { --slide-ancho: 300px; }
+  .contenedor { width: min(1200px, 90%); }
+  .navbar__links { display: flex; }
+  .beneficios { grid-template-columns: repeat(3, 1fr); }
+  .asesoria { grid-template-columns: repeat(3, 1fr); }
+  .footer__columnas { grid-template-columns: 2fr 1fr 1fr 1fr; }
+  .filtros { flex-wrap: wrap; overflow: visible; }
+}
+
+/* Escritorio */
+@media (min-width: 1100px) {
+  :root { --slide-ancho: 360px; }
+  .hero__contenido { grid-template-columns: 1.1fr 1fr; min-height: 80vh; }
+  .categorias { grid-template-columns: repeat(4, 1fr); }
+  .grid { grid-template-columns: repeat(4, 1fr); }
+  .builder { grid-template-columns: repeat(3, 1fr) 1.2fr; align-items: start; }
+  .barra__disco--grande { height: 170px; }
+  .barra__disco--medio  { height: 125px; }
+  .barra__disco--chico  { height: 80px; }
+}
