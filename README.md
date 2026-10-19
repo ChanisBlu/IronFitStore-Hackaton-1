@@ -28,7 +28,7 @@ tests/              Pruebas con Jest
 ## Equipo
 | Integrante | Rol |
 |---|---|
-| Víctor Caicedo | Estructura HTML |
-| Joce Bernal | Diseño y CSS |
-| César Luna | Catálogo de productos |
-| Isaac | Carrito, pruebas e integración |
+| Víctor Manuel Montaño | Estructura HTML |
+| Jocelin Bernal | Diseño y CSS |
+| César Nápoles | Catálogo de productos |
+| Isaac Razo | Carrito, pruebas e integración |
