@@ -708,3 +708,16 @@ main > aside { padding-block: var(--espacio-xl); }
   .grid { grid-template-columns: repeat(4, 1fr); }
   .card-img-top { aspect-ratio: 1; }
 }
+
+/* 4.1 Video de fondo del hero: cubre toda la sección detrás del texto */
+.hero__video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.45;
+  pointer-events: none;
+}
