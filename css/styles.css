@@ -349,24 +349,6 @@ main > aside { padding-block: var(--espacio-xl); }
 }
 .hero__acciones { display: flex; flex-wrap: wrap; gap: var(--espacio-m); margin-top: var(--espacio-s); }
 
-/* Barra olímpica con discos, solo CSS (escritorio) */
-.hero::after {
-  content: "";
-  display: none;
-  position: absolute;
-  top: 50%;
-  right: -6%;
-  width: 48%;
-  height: 220px;
-  transform: translateY(-50%);
-  pointer-events: none;
-  background:
-    linear-gradient(var(--color-acento), var(--color-acento)) 56% 50% / 18px 200px no-repeat,
-    linear-gradient(var(--color-acento), var(--color-acento)) 62% 50% / 18px 150px no-repeat,
-    linear-gradient(var(--color-acento), var(--color-acento)) 68% 50% / 18px 100px no-repeat,
-    linear-gradient(var(--color-metal), var(--color-metal-oscuro)) 0 50% / 100% 12px no-repeat;
-}
-
 /* 5. Catálogo (beneficios, categorías, configurador, cards y carrusel) */
 
 /* 5.1 Beneficios */
@@ -704,7 +686,6 @@ main > aside { padding-block: var(--espacio-xl); }
   :root { --slide-ancho: 360px; }
   .navbar__links { order: 0; width: auto; padding-bottom: 0; overflow: visible; }
   .hero__contenido { min-height: 70vh; }
-  .hero::after { display: block; }
   .grid { grid-template-columns: repeat(4, 1fr); }
   .card-img-top { aspect-ratio: 1; }
 }
