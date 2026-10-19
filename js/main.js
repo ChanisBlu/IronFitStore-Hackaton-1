@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     guardarCarrito(agregarProducto(obtenerCarrito(), producto));
     renderCarrito(id);
-    document.querySelector("#carrito").classList.add("is-abierto"); // muestra lo agregado
   });
 
   // 3. Quitar un artículo desde el carrito
@@ -40,23 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCarrito();
   });
 
-  // 5. Abrir y cerrar el panel del carrito (el CSS lo muestra con .is-abierto)
-  const panelCarrito = document.querySelector("#carrito");
-  const botonCarrito = document.querySelector("#btn-carrito");
-
-  // Botón ✕ para cerrar, creado con JS para no tocar el HTML
-  const botonCerrar = document.createElement("button");
-  botonCerrar.type = "button";
-  botonCerrar.className = "carrito__cerrar";
-  botonCerrar.setAttribute("aria-label", "Cerrar carrito");
-  botonCerrar.textContent = "✕";
-  panelCarrito.prepend(botonCerrar);
-
-  botonCarrito.addEventListener("click", () => panelCarrito.classList.toggle("is-abierto"));
-  botonCerrar.addEventListener("click", () => panelCarrito.classList.remove("is-abierto"));
-
-  // Cerrar con la tecla Escape
-  document.addEventListener("keydown", (evento) => {
-    if (evento.key === "Escape") panelCarrito.classList.remove("is-abierto");
+  // 5. El botón "Carrito" del navbar baja a la sección del carrito
+  document.querySelector("#btn-carrito").addEventListener("click", () => {
+    document.querySelector("#carrito").scrollIntoView({ behavior: "smooth" });
   });
 });
