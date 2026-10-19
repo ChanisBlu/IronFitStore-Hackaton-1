@@ -644,3 +644,117 @@ ul { padding: 0; }
   .barra__disco--medio  { height: 125px; }
   .barra__disco--chico  { height: 80px; }
 }
+/* =========================================================
+   11. Integración (puente entre el HTML de Víctor y este CSS)
+   Ajustes para que las clases del index.html usen el diseño.
+   ========================================================= */
+
+/* Secciones con encabezado + lista: la rejilla va en la lista, no en la sección */
+.categorias,
+.beneficios,
+.servicios { display: block; padding-block: var(--espacio-xl); }
+
+.categorias__lista,
+.beneficios__lista,
+.servicios__lista {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espacio-m);
+  margin-top: var(--espacio-l);
+}
+.categorias__lista { grid-template-columns: repeat(2, 1fr); }
+
+/* Tarjeta de categoría: número, nombre y descripción en columna */
+.categoria {
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  min-width: 0;
+  color: var(--color-texto);
+  text-decoration: none;
+}
+.categoria > * { position: relative; z-index: 1; margin: 0; }
+.categoria span { color: var(--color-acento); font-size: 0.9rem; }
+.categoria h3 { font-size: 1.1rem; overflow-wrap: anywhere; }
+.categoria p { font-family: var(--fuente-texto, inherit); font-size: 0.75rem; font-weight: 400; text-transform: none; color: var(--color-texto-suave); }
+
+/* Beneficios y servicios como tarjetas */
+.beneficio,
+.servicio {
+  padding: var(--espacio-l);
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-l);
+}
+
+/* Catálogo: las cards de productos.js traen columnas de Bootstrap;
+   dentro de la rejilla .grid deben ocupar su celda completa */
+#productos.grid { margin: 0; }
+#productos.grid > * { width: auto; max-width: none; padding: 0; margin: 0; }
+.card .btn-agregar { width: 100%; border-radius: var(--radio-pill); }
+
+/* Arma tu Home Gym: cada paso como tarjeta */
+.configurador { padding-block: var(--espacio-xl); }
+.configurador__paso {
+  margin-bottom: var(--espacio-m);
+  padding: var(--espacio-m) var(--espacio-l);
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-l);
+}
+.configurador__paso label { margin-right: var(--espacio-m); }
+.configurador__paso input { accent-color: var(--color-acento); }
+
+/* Carrito (panel lateral): artículos que pinta js/carrito.js */
+.carrito-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espacio-s);
+  padding-block: var(--espacio-s);
+  border-bottom: 1px solid var(--color-borde);
+}
+.btn-quitar,
+.carrito__cerrar {
+  background: none;
+  border: 1px solid var(--color-borde);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  color: var(--color-texto);
+  cursor: pointer;
+}
+.carrito__cerrar { position: absolute; top: var(--espacio-m); right: var(--espacio-m); }
+.carrito__total { display: block; }   /* "Total: $3,499 MXN" en una sola línea */
+.carrito-vacio { color: var(--color-texto-suave); list-style: none; }
+.carrito__vaciar {
+  padding: 0.6rem var(--espacio-m);
+  background: transparent;
+  color: var(--color-texto);
+  border: 1px solid var(--color-texto);
+  border-radius: var(--radio-pill);
+  cursor: pointer;
+}
+
+/* Animaciones de inserción al carrito (las clases las pone js/carrito.js) */
+@keyframes entrar-carrito {
+  from { opacity: 0; transform: translateX(30px); background: var(--color-acento); }
+  to   { opacity: 1; transform: translateX(0); background: transparent; }
+}
+.item-nuevo { animation: entrar-carrito 0.6s ease; }
+
+@keyframes salto {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.6); }
+}
+.contador-salto { display: inline-block; animation: salto 0.4s ease; }
+
+/* Escritorio */
+@media (min-width: 768px) {
+  .beneficios__lista,
+  .servicios__lista { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1100px) {
+  .categorias__lista { grid-template-columns: repeat(4, 1fr); }
+  .categoria h3 { font-size: 1.4rem; }
+}
