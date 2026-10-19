@@ -1,6 +1,6 @@
 /* =========================================================
-   main.js · Arranque de la página (responsable: Isaac + Víctor)
-   - Conecta catálogo y carrito. No poner lógica pesada aquí.
+   main.js · Arranque de la página (responsable: Isaac)
+   - Conecta catálogo y carrito con los botones.
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -8,19 +8,34 @@ document.addEventListener("DOMContentLoaded", () => {
   renderProductos(productos);
   renderCarrito();
 
-  // 2. Un solo "escuchador" para todos los botones .btn-agregar
+  // 2. Agregar: un solo "escuchador" para todos los botones .btn-agregar
   document.querySelector("#productos").addEventListener("click", (evento) => {
     const boton = evento.target.closest(".btn-agregar");
     if (!boton) return; // el clic no fue en un botón de agregar
 
-    const producto = buscarProductoPorId(Number(boton.dataset.id));
+    const id = Number(boton.dataset.id);
+    const producto = buscarProductoPorId(id);
     if (!producto) {
       console.error("Producto no encontrado:", boton.dataset.id);
       return;
     }
 
-    const carrito = agregarProducto(obtenerCarrito(), producto);
-    guardarCarrito(carrito);
+    guardarCarrito(agregarProducto(obtenerCarrito(), producto));
+    renderCarrito(id);
+  });
+
+  // 3. Quitar un artículo desde el carrito
+  document.querySelector("#carrito-lista").addEventListener("click", (evento) => {
+    const boton = evento.target.closest(".btn-quitar");
+    if (!boton) return;
+
+    guardarCarrito(quitarProducto(obtenerCarrito(), Number(boton.dataset.id)));
+    renderCarrito();
+  });
+
+  // 4. Vaciar todo el carrito
+  document.querySelector("#btn-vaciar").addEventListener("click", () => {
+    guardarCarrito([]);
     renderCarrito();
   });
 });
