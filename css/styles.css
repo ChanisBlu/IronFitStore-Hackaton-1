@@ -1,12 +1,13 @@
 /* ==========================================================
-Iron Fit Store · estilos propios (responsable: Joce)
-Orden: 1 Variables, 2 Base, 3 Navbar, 4 Hero, 5 Catálogo,
+   Iron Fit Store · estilos propios (responsable: Joce)
+   Orden: 1 Variables, 2 Base, 3 Navbar, 4 Hero, 5 Catálogo,
           6 Carrito, 7 Servicios, 8 Footer, 9 Animaciones,
           10 Responsivo
-Fuentes — agregar en el <head> del HTML:
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+   Va DESPUÉS de Bootstrap en el <head>, para que estos estilos ganen.
    ========================================================== */
+
+/* Fuentes de Google: títulos en Barlow Condensed, texto en Inter */
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;600&display=swap");
 
 /* 1. Variables: cambiar la paleta SOLO aquí */
 :root {
@@ -16,12 +17,18 @@ Fuentes — agregar en el <head> del HTML:
   --color-borde: #2e2e2e;
   --color-texto: #ffffff;
   --color-texto-suave: #b5b5b5;
-  --color-acento: #bb0010;        /* SOLO como relleno (botones, badges); como texto contrasta poco */
+  --color-acento: #bb0010;          /* SOLO como relleno; como texto contrasta poco */
 
   /* Tarjetas de producto claras (referencia Ironside) */
   --color-card: #fafafa;
   --color-card-texto: #0d0d0d;
   --color-card-suave: #5c5c5c;
+  --color-card-imagen: #ffffff;
+
+  /* Barra olímpica decorativa del hero */
+  --color-metal: #d9d9d9;
+  --color-metal-oscuro: #777777;
+  --velo: rgba(13, 13, 13, 0.85);
 
   /* Tipografía */
   --fuente-titulo: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
@@ -37,14 +44,18 @@ Fuentes — agregar en el <head> del HTML:
   --radio-pill: 999px;
   --transicion: 0.25s ease;
 
+  /* Margen lateral: centra el contenido a 1200 px sin limitar los fondos */
+  --ancho-max: 1200px;
+  --margen-lateral: max(var(--espacio-m), calc((100% - var(--ancho-max)) / 2));
+
   /* Ancho de cada video del carrusel */
   --slide-ancho: 220px;
 }
 
-/* 2. Base (reset, contenedor y componentes reutilizables) */
+/* 2. Base (reset, tipografía y componentes reutilizables) */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }   /* deja espacio al navbar fijo */
 
 body {
   background: var(--color-fondo);
@@ -55,23 +66,47 @@ body {
 
 img, video { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
-ul { list-style: none; }
+button { font: inherit; }
 
 /* Neutraliza márgenes y sangrías que Bootstrap (reboot) vuelve a aplicar */
-h1, h2, h3, h4, h5, h6, p { margin: 0; }
-ul { padding: 0; }
+h1, h2, h3, h4, h5, h6, p, ul { margin: 0; }
+ul { padding: 0; list-style: none; }
+
+/* Títulos: Barlow Condensed en mayúsculas */
+h2 {
+  font-family: var(--fuente-titulo);
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+}
+h3,
+.card-title {
+  margin: 0;
+  font-family: var(--fuente-titulo);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
 
 /* Foco visible para teclado (accesibilidad) */
 :focus-visible { outline: 3px solid var(--color-texto); outline-offset: 3px; }
 
-/* Contenedor central reutilizable */
-.contenedor {
-  width: min(1200px, 92%);
-  margin-inline: auto;
-}
+/* .contenedor envuelve toda la página: cada bloque pone su propio margen lateral */
+.contenedor { width: 100%; }
 
-/* Botón principal (rojo) + variantes */
-.btn {
+/* Todo bloque de página usa el mismo margen lateral y espacio vertical */
+.navbar,
+main > section,
+main > aside,
+.footer { padding-inline: var(--margen-lateral); }
+main > section,
+main > aside { padding-block: var(--espacio-xl); }
+
+/* Botón principal (rojo): también los enlaces .hero__boton */
+.btn,
+.hero__boton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -94,30 +129,46 @@ ul { padding: 0; }
   --bs-btn-active-bg: var(--color-acento);
   --bs-btn-active-border-color: var(--color-acento);
 }
-.btn:hover { transform: translateY(-2px); }
+.btn:hover,
+.hero__boton:hover { transform: translateY(-2px); }
 .btn:focus-visible { outline: 3px solid var(--color-texto); outline-offset: 3px; }   /* Bootstrap lo anula */
-.btn--outline {
+
+/* Botón con contorno (enlaces secundarios y "Vaciar carrito") */
+.btn--outline,
+.hero__enlace,
+.carrito__vaciar {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem var(--espacio-l);
   background: transparent;
-  border-color: var(--color-texto);
-  --bs-btn-hover-color: var(--color-fondo);
-  --bs-btn-hover-bg: var(--color-texto);
-  --bs-btn-hover-border-color: var(--color-texto);
-  --bs-btn-active-bg: var(--color-texto);
-  --bs-btn-active-color: var(--color-fondo);
-  --bs-btn-active-border-color: var(--color-texto);
+  color: var(--color-texto);
+  border: 2px solid var(--color-texto);
+  border-radius: var(--radio-pill);
+  font: 600 0.85rem var(--fuente);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--transicion), color var(--transicion);
 }
-.btn--outline:hover { background: var(--color-texto); color: var(--color-fondo); }
-.btn--oscuro {
+.btn--outline:hover,
+.hero__enlace:hover,
+.carrito__vaciar:hover { background: var(--color-texto); color: var(--color-fondo); }
+
+/* Botón oscuro (tarjetas claras): rojo al pasar el cursor */
+.btn--oscuro,
+.btn-agregar {
   background: var(--color-fondo);
   border-color: var(--color-fondo);
   --bs-btn-hover-border-color: var(--color-acento);
   --bs-btn-active-bg: var(--color-acento);
   --bs-btn-active-border-color: var(--color-acento);
 }
-.btn--oscuro:hover { background: var(--color-acento); border-color: var(--color-acento); }
-.btn--bloque { width: 100%; }
+.btn--oscuro:hover,
+.btn-agregar:hover { background: var(--color-acento); border-color: var(--color-acento); }
+.btn--bloque,
+.btn-agregar { width: 100%; }
 
-/* Etiqueta de descuento / novedad */
+/* Etiqueta de descuento / categoría */
 .badge {
   display: inline-block;
   padding: 0.15rem 0.6rem;
@@ -128,88 +179,76 @@ ul { padding: 0; }
   font-weight: 700;
 }
 
-/* Chip seleccionable (filtros y Builder) */
-.chip {
-  padding: 0.5rem 1.1rem;
-  background: transparent;
-  color: var(--color-texto);
-  border: 1px solid var(--color-borde);
-  border-radius: var(--radio-pill);
-  font: 600 0.9rem var(--fuente);
-  cursor: pointer;
-  transition: background var(--transicion), border-color var(--transicion);
+/* Rótulo pequeño sobre cada título, con barra roja */
+.hero__subtitulo,
+.configurador__etiqueta,
+.servicios__etiqueta {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-s);
+  color: var(--color-texto-suave);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
-.chip:hover { border-color: var(--color-texto); }
-.chip--activo { background: var(--color-acento); border-color: var(--color-acento); }
-.chips { display: flex; flex-wrap: wrap; gap: var(--espacio-s); }
+.hero__subtitulo::before,
+.configurador__etiqueta::before,
+.servicios__etiqueta::before {
+  content: "";
+  width: 32px;
+  height: 4px;
+  background: var(--color-acento);
+}
 
-/* Panel base: un solo estilo para todas las cajas oscuras */
-.panel,
+/* Caja oscura base: un solo estilo para todas las tarjetas del sitio */
 .beneficio,
-.paso,
-.resumen,
-.asesoria__card {
+.configurador__paso,
+.carrito__contenido,
+.servicio {
   background: var(--color-superficie);
   border: 1px solid var(--color-borde);
   border-radius: var(--radio-l);
   padding: var(--espacio-l);
 }
 
-/* Disco de pesa: motivo de marca (logo, contador, decoración) */
-.disco {
-  display: inline-block;
-  width: 1.4em;
-  height: 1.4em;
-  border-radius: 50%;
-  background: radial-gradient(circle, var(--color-fondo) 0 22%, var(--color-acento) 24% 100%);
-}
-
-/* Encabezado de sección */
-.seccion { padding-block: var(--espacio-xl); }
-.seccion__encabezado { margin-bottom: var(--espacio-l); }
-.etiqueta {
-  display: flex;
-  align-items: center;
+/* Encabezados de sección con título y texto de apoyo */
+.categorias__encabezado,
+.catalogo__encabezado {
+  display: grid;
   gap: var(--espacio-s);
-  margin-bottom: var(--espacio-s);
-  color: var(--color-texto-suave);
-  font-size: 0.8rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  margin-bottom: var(--espacio-l);
 }
-.etiqueta::before { content: ""; width: 32px; height: 4px; background: var(--color-acento); }
-.titulo {
-  font-family: var(--fuente-titulo);
-  font-size: clamp(2rem, 5vw, 3.25rem);
-  font-weight: 800;
-  line-height: 1;
-  text-transform: uppercase;
-}
+.categorias__encabezado p:last-child,
+.catalogo__encabezado p:last-child { color: var(--color-texto-suave); }
 
-/* 3. Navbar (incluye barra de anuncio) */
-/* Barra de anuncio superior */
+/* 3. Navbar (incluye la barra de anuncio) */
 .anuncio {
   background: var(--color-acento);
   color: var(--color-texto);
   text-align: center;
-  padding: var(--espacio-s);
+  padding: var(--espacio-s) var(--espacio-m);
   font-size: 0.85rem;
   font-weight: 600;
 }
 
-/* Navbar fija con logo, enlaces y contador del carrito */
+/* Navbar fija: logo, enlaces y botón del carrito */
 .navbar {
   position: sticky;
   top: 0;
   z-index: 100;
-  padding: 0;                      /* Bootstrap agrega padding a .navbar */
+  padding-block: 0;                /* Bootstrap agrega padding a .navbar */
   background: var(--color-fondo);
   border-bottom: 1px solid var(--color-borde);
 }
 .navbar__contenido {
   display: flex;
+  flex: 1 1 100%;                  /* Bootstrap hace flex a .navbar: sin esto se encoge */
+  min-width: 0;                    /* evita que los enlaces ensanchen la página en móvil */
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  gap: var(--espacio-s) var(--espacio-m);
   padding-block: var(--espacio-m);
 }
 .navbar__logo {
@@ -228,43 +267,69 @@ ul { padding: 0; }
   border-radius: 50%;
   background: radial-gradient(circle, var(--color-fondo) 0 22%, var(--color-acento) 24% 100%);
 }
-.navbar__links { display: none; gap: var(--espacio-l); }
+/* En móvil los enlaces pasan a una segunda fila con scroll horizontal */
+.navbar__links {
+  display: flex;
+  gap: var(--espacio-l);
+  order: 3;
+  width: 100%;
+  padding-bottom: var(--espacio-s);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
 .navbar__links a {
   color: var(--color-texto-suave);
   font-weight: 600;
+  white-space: nowrap;
   transition: color var(--transicion);
 }
 .navbar__links a:hover { color: var(--color-texto); }
-.navbar__carrito { position: relative; background: none; border: 0; color: inherit; font-size: 1.4rem; cursor: pointer; }
+.navbar__carrito {
+  position: relative;
+  padding: 0.5rem 1.1rem;
+  background: transparent;
+  color: var(--color-texto);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-pill);
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color var(--transicion);
+}
+.navbar__carrito:hover { border-color: var(--color-texto); }
 .navbar__contador {
   position: absolute;
   top: -8px;
-  right: -12px;
-  min-width: 20px;
-  padding: 0 4px;
+  right: -8px;
+  min-width: 22px;
+  padding: 0 6px;
   background: var(--color-acento);
   border-radius: var(--radio-pill);
   font-size: 0.75rem;
+  line-height: 22px;
   text-align: center;
 }
 
 /* 4. Hero */
-/* Hero: titular + barra cargada con discos */
 .hero {
+  position: relative;
   overflow: hidden;
+  padding-block: var(--espacio-xl);
   background:
-    linear-gradient(90deg, rgba(13, 13, 13, 0.95) 35%, rgba(13, 13, 13, 0.6)),
+    linear-gradient(90deg, var(--color-fondo) 30%, var(--velo)),
     url("../img/hero.jpg") center / cover no-repeat,
     var(--color-superficie);
 }
 .hero__contenido {
-  display: grid;
-  gap: var(--espacio-l);
-  align-items: center;
-  padding-block: var(--espacio-xl);
+  position: relative;              /* queda sobre la barra decorativa */
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espacio-m);
+  max-width: 640px;
+  justify-content: center;
 }
 .hero__titulo {
-  margin-bottom: var(--espacio-m);
   font-family: var(--fuente-titulo);
   font-size: clamp(3rem, 12vw, 6.5rem);
   font-weight: 800;
@@ -272,74 +337,64 @@ ul { padding: 0; }
   text-transform: uppercase;
   animation: aparecer 0.8s ease both;
 }
-.hero__contorno {                  /* línea con solo contorno */
+.hero__contorno {                  /* línea solo con contorno (envolver "A TU MEDIDA" en un <span>) */
   display: block;
   color: transparent;
   -webkit-text-stroke: 2px var(--color-texto);
 }
-.hero__subtitulo {
+.hero__descripcion {
   max-width: 42ch;
-  margin-bottom: var(--espacio-l);
   color: var(--color-texto-suave);
   animation: aparecer 0.8s 0.2s ease both;
 }
-.hero__acciones { display: flex; flex-wrap: wrap; gap: var(--espacio-m); }
+.hero__acciones { display: flex; flex-wrap: wrap; gap: var(--espacio-m); margin-top: var(--espacio-s); }
 
-/* "Carga tu barra": barra olímpica con discos (todo en CSS) */
-.hero__visual { display: flex; flex-direction: column; align-items: center; gap: var(--espacio-m); }
-.barra { display: flex; align-items: center; width: 100%; }
-.barra__eje {
-  flex: 1;
-  height: 10px;
-  background: linear-gradient(#e6e6e6, #777);
-  border-radius: 6px;
+/* Barra olímpica con discos, solo CSS (escritorio) */
+.hero::after {
+  content: "";
+  display: none;
+  position: absolute;
+  top: 50%;
+  right: -6%;
+  width: 48%;
+  height: 220px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  background:
+    linear-gradient(var(--color-acento), var(--color-acento)) 56% 50% / 18px 200px no-repeat,
+    linear-gradient(var(--color-acento), var(--color-acento)) 62% 50% / 18px 150px no-repeat,
+    linear-gradient(var(--color-acento), var(--color-acento)) 68% 50% / 18px 100px no-repeat,
+    linear-gradient(var(--color-metal), var(--color-metal-oscuro)) 0 50% / 100% 12px no-repeat;
 }
-.barra__discos { display: flex; align-items: center; gap: 3px; }
-.barra__disco {
-  width: 14px;
-  background: var(--color-acento);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 3px;
-}
-.barra__disco--grande { height: 130px; }
-.barra__disco--medio  { height: 95px; }
-.barra__disco--chico  { height: 60px; }
-.carga {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: var(--espacio-m) var(--espacio-l);
-  background: rgba(26, 26, 26, 0.85);
-  border: 1px solid var(--color-borde);
-  border-radius: var(--radio-l);
-}
-.carga__peso { font-family: var(--fuente-titulo); font-size: 3rem; font-weight: 800; line-height: 1; }
-.carga__etiqueta { color: var(--color-texto-suave); font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; }
 
-/* 5. Catálogo (categorías, Builder, filtros, cards y carrusel de videos) */
-/* Categorías con imagen de fondo */
-.categorias { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--espacio-m); }
+/* 5. Catálogo (beneficios, categorías, configurador, cards y carrusel) */
+
+/* 5.1 Beneficios */
+.beneficios { display: grid; gap: var(--espacio-l); }
+.beneficios__lista { display: grid; gap: var(--espacio-m); }
+.beneficio { border-top: 4px solid var(--color-acento); }
+.beneficio p { margin-top: var(--espacio-s); color: var(--color-texto-suave); }
+
+/* 5.2 Categorías con imagen de fondo (las imágenes se agregan al final) */
+.categorias__lista { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--espacio-m); }
 .categoria {
   position: relative;
   display: flex;
-  align-items: flex-end;
-  aspect-ratio: 4 / 3;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 190px;
   padding: var(--espacio-m);
   overflow: hidden;
   border: 1px solid var(--color-borde);
   border-radius: var(--radio-l);
   background: var(--color-superficie) center / cover no-repeat;
-  font-family: var(--fuente-titulo);
-  font-size: 1.4rem;
-  font-weight: 700;
-  text-transform: uppercase;
   transition: transform var(--transicion);
 }
-.categoria::before {               /* degradado para leer el nombre */
+.categoria::before {               /* degradado para leer el texto */
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(transparent 40%, rgba(0, 0, 0, 0.85));
+  background: linear-gradient(transparent 30%, var(--color-fondo));
 }
 .categoria::after {                /* anillo de disco decorativo */
   content: "";
@@ -352,106 +407,120 @@ ul { padding: 0; }
   border-radius: 50%;
   opacity: 0.35;
 }
-.categoria__nombre { position: relative; z-index: 1; }
+.categoria span {                  /* número de la categoría */
+  position: absolute;
+  top: var(--espacio-m);
+  left: var(--espacio-m);
+  z-index: 1;
+  color: var(--color-texto-suave);
+  font-family: var(--fuente-titulo);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.categoria h3,
+.categoria p { position: relative; z-index: 1; }
+.categoria p { color: var(--color-texto-suave); font-size: 0.85rem; }
 .categoria:hover { transform: scale(1.03); }
 
-/* IronFit Builder: arma tu home gym en 3 pasos */
-.builder { display: grid; gap: var(--espacio-m); }
-.paso__numero {
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  margin-bottom: var(--espacio-s);
-  background: var(--color-acento);
-  border-radius: 50%;
-  font-family: var(--fuente-titulo);
-  font-size: 1.3rem;
-  font-weight: 800;
+/* 5.3 Configurador "Arma tu home gym": opciones de radio como botones */
+.configurador {
+  background: var(--color-superficie);
+  border-block: 1px solid var(--color-borde);
 }
-.paso__titulo { margin-bottom: var(--espacio-m); font-family: var(--fuente-titulo); font-size: 1.5rem; text-transform: uppercase; }
-.rango { width: 100%; accent-color: var(--color-acento); }
-.rango__valor { margin-top: var(--espacio-s); font-family: var(--fuente-titulo); font-size: 1.8rem; font-weight: 700; }
-.resumen__lista li {
+.configurador__contenido { display: grid; gap: var(--espacio-m); }
+.configurador__contenido > :not(.configurador__paso) { grid-column: 1 / -1; }
+.configurador__contenido > p:not(.configurador__etiqueta):not(.configurador__nota) { color: var(--color-texto-suave); }
+.configurador__paso {
   display: flex;
-  justify-content: space-between;
-  gap: var(--espacio-m);
-  padding-block: var(--espacio-s);
-  border-bottom: 1px solid var(--color-borde);
-}
-.resumen__total {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-block: var(--espacio-m);
-  font-family: var(--fuente-titulo);
-  font-size: 2.2rem;
-  font-weight: 800;
-}
-
-/* Filtros del catálogo (scroll horizontal en móvil) */
-.filtros {
-  display: flex;
+  flex-wrap: wrap;
   gap: var(--espacio-s);
-  margin-bottom: var(--espacio-l);
-  padding-bottom: var(--espacio-s);
-  overflow-x: auto;
-  scrollbar-width: none;
+  align-content: flex-start;
+  background: var(--color-fondo);
 }
-.filtros .chip { flex: none; }
+.configurador__paso legend {
+  float: left;                     /* el legend queda como título dentro de la caja */
+  width: 100%;
+  margin-bottom: var(--espacio-s);
+  font-family: var(--fuente-titulo);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.configurador__paso label:has(input[type="radio"]) {
+  position: relative;
+  padding: 0.5rem 1.1rem;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-pill);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transicion), border-color var(--transicion);
+}
+.configurador__paso input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
+.configurador__paso label:has(input[type="radio"]):hover { border-color: var(--color-texto); }
+.configurador__paso label:has(input:checked) { background: var(--color-acento); border-color: var(--color-acento); }
+.configurador__paso label:has(input:focus-visible) { outline: 3px solid var(--color-texto); outline-offset: 3px; }
+.configurador__paso input[type="number"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--color-superficie);
+  color: var(--color-texto);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  font: inherit;
+}
+.configurador__nota { color: var(--color-texto-suave); font-size: 0.85rem; }
+.configurador__contenido > .hero__boton { justify-self: start; }
 
-/* Cuadrícula de productos */
+/* 5.4 Cards de producto CLARAS (las pinta js/productos.js con clases de Bootstrap) */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: var(--espacio-m);
+  margin: 0;
+  --bs-gutter-x: 0;
+  --bs-gutter-y: 0;
 }
-
-/* Card de producto CLARA (la pinta js/productos.js) */
+.grid > * { width: auto; max-width: none; padding: 0; margin: 0 !important; }   /* anula .col-* y .mb-4 */
 .card {
   display: flex;
   flex-direction: column;
   background: var(--color-card);
   color: var(--color-card-texto);
+  border: 0;
   border-radius: var(--radio-l);
   overflow: hidden;
   transition: transform var(--transicion), box-shadow var(--transicion);
 }
-.card:hover { transform: translateY(-6px); box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5); }
-.card__imagen {
+.card:hover { transform: translateY(-6px); box-shadow: 0 16px 32px var(--velo); }
+.card-img-top {
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 4 / 3;            /* más baja en móvil para no alargar la página */
   padding: var(--espacio-m);
   object-fit: contain;
-  background: #ffffff;
+  background: var(--color-card-imagen);
+  color: var(--color-card-suave);  /* texto alternativo mientras no hay imagen */
+  font-size: 0.8rem;
 }
-.card__cuerpo {
+.card-body {
   display: flex;
   flex: 1;
   flex-direction: column;
   gap: var(--espacio-s);
   padding: var(--espacio-m);
 }
-.card__categoria {
-  color: var(--color-card-suave);
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-.card__nombre {
+.card .badge { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.card-text { color: var(--color-card-suave); font-size: 0.9rem; margin: 0; }
+.card-body .fw-bold {              /* precio */
+  margin: 0;
   font-family: var(--fuente-titulo);
-  font-size: 1.5rem;
-  font-weight: 700;
-  line-height: 1.05;
-  text-transform: uppercase;
+  font-size: 1.9rem;
+  line-height: 1;
 }
-.card__descripcion { color: var(--color-card-suave); font-size: 0.9rem; }
-.card__precios { display: flex; flex-wrap: wrap; align-items: center; gap: var(--espacio-s); margin-top: auto; }  /* precios alineados abajo */
-.card__precio { font-family: var(--fuente-titulo); font-size: 2.25rem; font-weight: 700; line-height: 1; }
-.card__antes { color: var(--color-card-suave); font-size: 0.85rem; text-decoration: line-through; }
+.catalogo__acciones { display: flex; justify-content: center; margin-top: var(--espacio-l); }
 
-/* Carrusel de videos (estilo coverflow de Ironside) */
-.carrusel { position: relative; overflow: hidden; padding-block: var(--espacio-l); }
+/* 5.5 Carrusel de videos estilo Ironside (sección .carrusel, aún por agregar al HTML) */
+.carrusel { padding-inline: 0; overflow: hidden; }
 .carrusel__pista {
   display: flex;
   gap: var(--espacio-m);
@@ -475,26 +544,7 @@ ul { padding: 0; }
   transition: opacity var(--transicion), transform var(--transicion);
 }
 .carrusel__slide.is-activo { opacity: 1; transform: scale(1); }   /* lo marca el JS */
-.carrusel__media { width: 100%; height: 100%; object-fit: cover; }   /* <video> o <img>/GIF */
-.carrusel__slide::after {          /* degradado para leer el pie del video */
-  content: "";
-  position: absolute;
-  inset: 40% 0 0;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
-  pointer-events: none;
-}
-
-/* Mejora: efecto 3D según la posición, solo CSS (Chrome, Edge, Safari reciente) */
-@supports (animation-timeline: view(inline)) {
-  .carrusel__slide {
-    opacity: 1;
-    transform: none;
-    animation: coverflow linear both;
-    animation-timeline: view(inline);
-  }
-}
-
-/* Barra inferior: flechas + producto del video actual */
+.carrusel__media { width: 100%; height: 100%; object-fit: cover; }   /* <video>, <img> o GIF */
 .carrusel__barra {
   display: flex;
   align-items: center;
@@ -524,44 +574,32 @@ ul { padding: 0; }
   color: var(--color-card-texto);
   border-radius: var(--radio-pill);
 }
-.carrusel__miniatura { width: 44px; height: 44px; object-fit: contain; }
 .carrusel__info { min-width: 0; }
 .carrusel__nombre { overflow: hidden; font-size: 0.85rem; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
 .carrusel__precio { font-family: var(--fuente-titulo); font-size: 1.3rem; font-weight: 700; line-height: 1; }
 
-/* 6. Carrito */
-/* Panel lateral del carrito (lo pinta js/carrito.js; .is-abierto lo muestra) */
-.carrito {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 200;
-  display: flex;
-  flex-direction: column;
-  width: min(400px, 100%);
-  height: 100%;
-  padding: var(--espacio-l);
-  background: var(--color-superficie);
-  border-left: 1px solid var(--color-borde);
-  transform: translateX(100%);
-  transition: transform var(--transicion);
+/* Mejora: efecto 3D según la posición, solo CSS (Chrome, Edge y Safari reciente) */
+@supports (animation-timeline: view(inline)) {
+  .carrusel__slide {
+    opacity: 1;
+    transform: none;
+    animation: coverflow linear both;
+    animation-timeline: view(inline);
+  }
 }
-.carrito.is-abierto { transform: translateX(0); }
-.carrito__titulo { margin-bottom: var(--espacio-m); font-family: var(--fuente-titulo); font-size: 1.8rem; text-transform: uppercase; }
-.carrito__lista { flex: 1; overflow-y: auto; }
-.carrito__vacio { padding-block: var(--espacio-l); color: var(--color-texto-suave); text-align: center; }
-.carrito__item {
+
+/* 6. Carrito (sección con los artículos que pinta js/carrito.js) */
+.carrito__contenido { display: grid; gap: var(--espacio-m); width: min(760px, 100%); margin-inline: auto; }
+.carrito-item {
   display: grid;
-  grid-template-columns: 64px 1fr auto;
+  grid-template-columns: 1fr auto auto;
   gap: var(--espacio-m);
   align-items: center;
-  padding-block: var(--espacio-m);
+  padding-block: var(--espacio-s);
   border-bottom: 1px solid var(--color-borde);
 }
-.carrito__imagen { width: 64px; height: 64px; object-fit: contain; background: #ffffff; border-radius: var(--radio); }
-.carrito__nombre { font-size: 0.9rem; font-weight: 600; }
-.carrito__cantidad { display: flex; align-items: center; gap: var(--espacio-s); }
-.carrito__cantidad button, .carrito__quitar {
+.carrito-vacio { padding-block: var(--espacio-l); color: var(--color-texto-suave); text-align: center; }
+.btn-quitar {
   width: 28px;
   height: 28px;
   background: transparent;
@@ -569,47 +607,75 @@ ul { padding: 0; }
   border: 1px solid var(--color-borde);
   border-radius: 50%;
   cursor: pointer;
+  transition: background var(--transicion), border-color var(--transicion);
 }
-.carrito__total { display: flex; justify-content: space-between; margin-block: var(--espacio-m); font-family: var(--fuente-titulo); font-size: 2rem; font-weight: 800; }
-.carrito__error { margin-bottom: var(--espacio-m); padding: var(--espacio-s) var(--espacio-m); background: var(--color-acento); border-radius: var(--radio); font-size: 0.85rem; }  /* mensajes de error */
-
-/* 7. Servicios (beneficios y asesoría) */
-/* Franja de beneficios (envío, entrega, retiro) */
-.beneficios {
-  display: grid;
-  gap: var(--espacio-m);
-  padding-block: var(--espacio-l);
-  text-align: center;
+.btn-quitar:hover { background: var(--color-acento); border-color: var(--color-acento); }
+.carrito__total {
+  font-family: var(--fuente-titulo);
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: right;
 }
+.carrito__vaciar { justify-self: start; }
 
-/* Asesoría completa */
-.asesoria { display: grid; gap: var(--espacio-m); }
-.asesoria__titulo { margin-bottom: var(--espacio-s); font-family: var(--fuente-titulo); font-size: 1.6rem; text-transform: uppercase; }
-.asesoria__card p { color: var(--color-texto-suave); }
+/* 7. Servicios (asesoría) */
+.servicios__contenido { display: grid; gap: var(--espacio-m); }
+.servicios__descripcion { max-width: 60ch; color: var(--color-texto-suave); }
+.servicios__lista { display: grid; gap: var(--espacio-m); margin-top: var(--espacio-m); }
+.servicio p { margin-top: var(--espacio-s); color: var(--color-texto-suave); }
+.servicio__numero {                /* número grande solo con contorno */
+  display: block;
+  margin-bottom: var(--espacio-s);
+  color: transparent;
+  -webkit-text-stroke: 1px var(--color-texto-suave);
+  font-family: var(--fuente-titulo);
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
 
 /* 8. Footer */
-/* Footer */
 .footer {
-  margin-top: var(--espacio-l);
-  padding-block: var(--espacio-xl) var(--espacio-l);
+  padding-block: var(--espacio-xl);
   background: var(--color-superficie);
   border-top: 1px solid var(--color-borde);
   color: var(--color-texto-suave);
 }
-.footer__columnas { display: grid; gap: var(--espacio-l); margin-bottom: var(--espacio-l); }
-.footer__titulo { margin-bottom: var(--espacio-s); color: var(--color-texto); font-family: var(--fuente-titulo); font-size: 1.2rem; text-transform: uppercase; }
+.footer__contenido { display: grid; gap: var(--espacio-l); }
+.footer h2 {
+  margin-bottom: var(--espacio-s);
+  color: var(--color-texto);
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+}
+.footer__marca .navbar__logo { color: var(--color-texto); }
+.footer__marca p { margin-top: var(--espacio-s); }
 .footer__links li { padding-block: 0.2rem; }
+.footer__links a { transition: color var(--transicion); }
 .footer__links a:hover { color: var(--color-texto); }
-.footer__legal { padding-top: var(--espacio-m); border-top: 1px solid var(--color-borde); font-size: 0.85rem; text-align: center; }
 
-/* 9. Animaciones */
+/* 9. Animaciones: ligeras, solo CSS */
 @keyframes aparecer {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 .card { animation: aparecer 0.5s ease both; }
 
-/* Coverflow: 0% = entra por la derecha, 50% = centrado, 100% = sale por la izquierda */
+/* Contador del navbar: salto al agregar un producto (clase que pone js/carrito.js) */
+@keyframes salto {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.5); }
+}
+.contador-salto { animation: salto 0.4s ease; }
+
+/* Artículo recién agregado al carrito: entra deslizando y se resalta */
+@keyframes entrar {
+  from { opacity: 0; transform: translateX(24px); background: var(--color-acento); }
+  to   { opacity: 1; transform: translateX(0); background: transparent; }
+}
+.item-nuevo { animation: entrar 0.5s ease both; }
+
+/* Carrusel: 0% entra por la derecha, 50% centrado, 100% sale por la izquierda */
 @keyframes coverflow {
   0%   { opacity: 0.4; transform: perspective(900px) rotateY(-32deg) scale(0.8); }
   50%  { opacity: 1;   transform: perspective(900px) rotateY(0) scale(1); }
@@ -622,25 +688,23 @@ ul { padding: 0; }
 }
 
 /* 10. Responsivo (celular primero: lo anterior ya es base móvil) */
+
 /* Tablet */
 @media (min-width: 768px) {
   :root { --slide-ancho: 300px; }
-  .contenedor { width: min(1200px, 90%); }
-  .navbar__links { display: flex; }
-  .beneficios { grid-template-columns: repeat(3, 1fr); }
-  .asesoria { grid-template-columns: repeat(3, 1fr); }
-  .footer__columnas { grid-template-columns: 2fr 1fr 1fr 1fr; }
-  .filtros { flex-wrap: wrap; overflow: visible; }
+  .beneficios__lista,
+  .servicios__lista { grid-template-columns: repeat(3, 1fr); }
+  .categorias__lista { grid-template-columns: repeat(4, 1fr); }
+  .configurador__contenido { grid-template-columns: repeat(3, 1fr); }
+  .footer__contenido { grid-template-columns: 2fr 1fr 1fr 1.5fr; }
 }
 
 /* Escritorio */
 @media (min-width: 1100px) {
   :root { --slide-ancho: 360px; }
-  .hero__contenido { grid-template-columns: 1.1fr 1fr; min-height: 80vh; }
-  .categorias { grid-template-columns: repeat(4, 1fr); }
+  .navbar__links { order: 0; width: auto; padding-bottom: 0; overflow: visible; }
+  .hero__contenido { min-height: 70vh; }
+  .hero::after { display: block; }
   .grid { grid-template-columns: repeat(4, 1fr); }
-  .builder { grid-template-columns: repeat(3, 1fr) 1.2fr; align-items: start; }
-  .barra__disco--grande { height: 170px; }
-  .barra__disco--medio  { height: 125px; }
-  .barra__disco--chico  { height: 80px; }
+  .card-img-top { aspect-ratio: 1; }
 }
