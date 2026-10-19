@@ -1,0 +1,11 @@
+{
+  "name": "ironfit-store",
+  "version": "1.0.0",
+  "description": "Landing page de Iron Fit Store, tienda de equipo de fuerza (Hackatón 1, Generation CH73)",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

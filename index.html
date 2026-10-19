@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Iron Fit Store: equipo de fuerza para tu gimnasio en casa">
+  <title>Iron Fit Store</title>
+
+  <!-- Bootstrap 5.3.8 (rejilla y componentes responsivos) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Estilos propios del equipo (siempre después de Bootstrap) -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ===== NAVBAR (responsable: Víctor) ===== -->
+  <header>
+    <nav class="navbar">
+      <a class="navbar-brand" href="#inicio">Iron Fit Store</a>
+      <!-- Contador del carrito: lo actualiza js/carrito.js -->
+      <button id="btn-carrito" type="button">
+        Carrito (<span id="carrito-contador">0</span>)
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===== HERO (responsable: Víctor) ===== -->
+    <section id="inicio">
+      <h1>Iron Fit Store</h1>
+      <p>Eslogan aquí</p>
+    </section>
+
+    <!-- ===== CATÁLOGO (las cards las pinta js/productos.js, responsable: César) ===== -->
+    <section id="catalogo">
+      <h2>Catálogo</h2>
+      <!-- NO escribir cards a mano aquí: se generan con JS -->
+      <div id="productos" class="row"></div>
+    </section>
+
+    <!-- ===== CARRITO (lo llena js/carrito.js, responsable: Isaac) ===== -->
+    <aside id="carrito">
+      <h2>Tu carrito</h2>
+      <ul id="carrito-lista"></ul>
+      <p>Total: $<span id="carrito-total">0</span> MXN</p>
+      <button id="btn-vaciar" type="button">Vaciar carrito</button>
+    </aside>
+
+    <!-- ===== SERVICIOS / NOSOTROS (responsable: Víctor) ===== -->
+    <section id="servicios">
+      <h2>Servicios</h2>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER (responsable: Víctor) ===== -->
+  <footer>
+    <p>Iron Fit Store · Hackatón 1 · Generation México CH73</p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Scripts del equipo: el ORDEN importa (datos, carrito, arranque) -->
+  <script src="js/productos.js"></script>
+  <script src="js/carrito.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
