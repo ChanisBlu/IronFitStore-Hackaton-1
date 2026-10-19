@@ -4,106 +4,21 @@
    - Cada producto sigue el estándar de GUIA-EQUIPO.md.
    ========================================================= */
 
-// Lista de productos (ejemplos: César completa hasta 8 a 12)
+// Lista de productos de la tienda (12 en total)
 const productos = [
-  {
-    id: 1,
-    nombre: "Barra olímpica 20 kg",
-    precio: 3499,
-    categoria: "barras",
-    imagen: "img/barra-olimpica.jpg",
-    descripcion: "Barra de 2.20 m, soporta hasta 300 kg."
-  },
-  {
-    id: 2,
-    nombre: "Par de discos bumper 10 kg",
-    precio: 1899,
-    categoria: "discos",
-    imagen: "img/discos-bumper-10.jpg",
-    descripcion: "Discos de hule de alta densidad, centro de acero."
-  },
-  {
-    id: 3,
-    nombre: "Mancuernas hexagonales 15 kg (par)",
-    precio: 1599,
-    categoria: "mancuernas",
-    imagen: "img/mancuernas-hexagonales-15.jpg",
-    descripcion: "Mancuernas hexagonales de 15 kg, material de alta calidad."
-  },
-  {
-    id: 4,
-    nombre: "Kettlebell de hierro 16 kg",
-    precio: 899,
-    categoria: "kettlebells",
-    imagen: "img/kettlebell-16.jpg",
-    descripcion: "Kettlebell de hierro de 16 kg, ideal para entrenamiento funcional."
-  },
-  {
-    id: 5,
-    nombre: "Rack de potencia",
-    precio: 12999,
-    categoria: "racks",
-    imagen: "img/rack-potencia.jpg",
-    descripcion: "Rack de potencia con soporte para pesas, ideal para entrenamiento en el gimnasio."
-  },
-  {
-    id: 6,
-    nombre: "Banco ajustable",
-    precio: 3299,
-    categoria: "bancos",
-    imagen: "img/banco-ajustable.jpg",
-    descripcion: "Banco ajustable con soporte para pesas, ideal para entrenamiento en el gimnasio."
-  },
-  {
-    id: 7,
-    nombre: "Máquina de poleas",
-    precio: 18999,
-    categoria: "maquinas",
-    imagen: "img/maquina-poleas.jpg",
-    descripcion: "Máquina de poleas para entrenamiento funcional, ideal para gimnasio."
-  },
-  {
-    id: 8,
-    nombre: "Barra Z para curl",
-    precio: 1299,
-    categoria: "barras",
-    imagen: "img/barra-z.jpg",
-    descripcion: "Barra Z para curl, ideal para entrenamiento de bíceps." 
-  },
-  {
-    id: 9,
-    nombre: "Par de discos bumper 20 kg",
-    precio: 3299,
-    categoria: "discos",
-    imagen: "img/discos-bumper-20.jpg",
-    descripcion: "Discos de hule de alta densidad, centro de acero."
-  },
-  {
-    id: 10,
-    nombre: "Mancuernas ajustables 24 kg (par)",
-    precio: 4599,
-    categoria: "mancuernas",
-    imagen: "img/mancuernas-ajustables-24.jpg",
-    descripcion: "Mancuernas ajustables de 24 kg, material de alta calidad."
-  },
-  {
-    id: 11,
-    nombre: "Kettlebell competencia 24 kg",
-    precio: 1499,
-    categoria: "kettlebells",
-    imagen: "img/kettlebell-24.jpg",
-    descripcion: "Kettlebell de competencia de 24 kg, ideal para entrenamiento funcional."
-  },
-  {
-    id: 12,
-    nombre: "Banco plano reforzado",
-    precio: 2199,
-    categoria: "bancos",
-    imagen: "img/banco-plano.jpg",
-    descripcion: "Banco plano reforzado con soporte para pesas, ideal para entrenamiento en el gimnasio."
-  }
+  { id: 1, nombre: "Barra olímpica 20 kg", precio: 3499, categoria: "barras", imagen: "img/barra-olimpica.jpg", descripcion: "Barra de 2.20 m, soporta hasta 300 kg." },
+  { id: 2, nombre: "Par de discos bumper 10 kg", precio: 1899, categoria: "discos", imagen: "img/discos-bumper-10.jpg", descripcion: "Discos de hule de alta densidad, centro de acero." },
+  { id: 3, nombre: "Mancuernas hexagonales 15 kg (par)", precio: 1599, categoria: "mancuernas", imagen: "img/mancuernas-hexagonales-15.jpg", descripcion: "Mancuernas hexagonales de 15 kg, material de alta calidad." },
+  { id: 4, nombre: "Kettlebell de hierro 16 kg", precio: 899, categoria: "kettlebells", imagen: "img/kettlebell-16.jpg", descripcion: "Kettlebell de hierro de 16 kg, ideal para entrenamiento funcional." },
+  { id: 5, nombre: "Rack de potencia", precio: 12999, categoria: "racks", imagen: "img/rack-potencia.jpg", descripcion: "Rack de potencia con soporte para pesas, ideal para entrenamiento en el gimnasio." },
+  { id: 6, nombre: "Banco ajustable", precio: 3299, categoria: "bancos", imagen: "img/banco-ajustable.jpg", descripcion: "Banco ajustable con soporte para pesas, ideal para entrenamiento en el gimnasio." },
+  { id: 7, nombre: "Máquina de poleas", precio: 18999, categoria: "maquinas", imagen: "img/maquina-poleas.jpg", descripcion: "Máquina de poleas para entrenamiento funcional, ideal para gimnasio." },
+  { id: 8, nombre: "Barra Z para curl", precio: 1299, categoria: "barras", imagen: "img/barra-z.jpg", descripcion: "Barra Z para curl, ideal para entrenamiento de bíceps." },
+  { id: 9, nombre: "Par de discos bumper 20 kg", precio: 3299, categoria: "discos", imagen: "img/discos-bumper-20.jpg", descripcion: "Discos de hule de alta densidad, centro de acero." },
+  { id: 10, nombre: "Mancuernas ajustables 24 kg (par)", precio: 4599, categoria: "mancuernas", imagen: "img/mancuernas-ajustables-24.jpg", descripcion: "Mancuernas ajustables de 24 kg, material de alta calidad." },
+  { id: 11, nombre: "Kettlebell competencia 24 kg", precio: 1499, categoria: "kettlebells", imagen: "img/kettlebell-24.jpg", descripcion: "Kettlebell de competencia de 24 kg, ideal para entrenamiento funcional." },
+  { id: 12, nombre: "Banco plano reforzado", precio: 2199, categoria: "bancos", imagen: "img/banco-plano.jpg", descripcion: "Banco plano reforzado con soporte para pesas, ideal para entrenamiento en el gimnasio." }
 ];
-
 
 /**
  * Busca un producto por su id.
@@ -161,5 +76,3 @@ function crearCard(producto) {
     </div>
   `;
 }
-
-
