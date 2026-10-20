@@ -316,7 +316,6 @@ main > aside { padding-block: var(--espacio-xl); }
   padding-block: var(--espacio-xl);
   background:
     linear-gradient(90deg, var(--color-fondo) 30%, var(--velo)),
-    url("../img/hero.jpg") center / cover no-repeat,
     var(--color-superficie);
 }
 .hero__contenido {
